@@ -21,8 +21,7 @@ public class CameraMovement : MonoBehaviour
         speed = StartingSpeed+Acceleration*Mathf.Abs(transform.position.y);
 
         float targetSpeed = speed;
-
-        Debug.Log(player.position.y-transform.position.y);
+        
         if(player.position.y-transform.position.y < FollowHeight)
             targetSpeed = speed+Mathf.Pow(FollowHeight+transform.position.y-player.position.y,System.MathF.E);
 
