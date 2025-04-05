@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform cam;
 
     public int Score { get { return (int)Mathf.Floor(-cam.position.y); } }
+    public float Distance { get => cam.position.y; }
 
     private void Start()
     {
