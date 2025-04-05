@@ -80,30 +80,36 @@ public class PlayerMovement : MonoBehaviour
         applyAngle = true;
         ren.flipX = inputHorizontal < 0;
 
-        string targetAnimation = "Idle Fall";
+        string targetAnimation = GetAnimation();
+        if(damaging)
+        Debug.Log(damaging.ToString() + targetAnimation);
+
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName(targetAnimation)) animator.Play(targetAnimation);
+    }
+
+    string GetAnimation()
+    {
         if (damaging)
         {
             applyAngle = false;
-            targetAnimation = "Hurt";
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
-            damaging = false;
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hurt") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+                damaging = false;
+            return "Hurt";
         }
-        else if (dashing) targetAnimation = "Dash";
+        else if (dashing) return "Dash";
         else if (inputVertical > 0.1f)
         {
-            if (Mathf.Abs(inputHorizontal) > 0.1f) targetAnimation = "Float Direction";
-            else targetAnimation = "Float";
+            if (Mathf.Abs(inputHorizontal) > 0.1f) return "Float Direction";
+            else return "Float";
         }
         else if (inputVertical < -0.1f)
         {
             flipAngle = true;
-            targetAnimation = "Dive";
             ren.flipX = false;
+            return "Dive";
         }
-        else if (Mathf.Abs(inputHorizontal) > 0.1f) targetAnimation = "Fall Directional";
-        else targetAnimation = "Idle Fall";
-        
-        if(!animator.GetCurrentAnimatorStateInfo(0).IsName(targetAnimation)) animator.Play(targetAnimation);
+        else if (Mathf.Abs(inputHorizontal) > 0.1f) return "Fall Directional";
+        else return "Idle Fall";
     }
 
     void FixedUpdate()
@@ -165,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
         float targetAngle = 180 / (2 * Mathf.PI) * Mathf.Atan(targetXVelocity / targetYVelocity); //includes converstion to degrees
         if (flipAngle) targetAngle = -targetAngle;
         transform.eulerAngles = new Vector3(0, 0, targetAngle);
-        if(!applyAngle) transform.rotation = Quaternion.identity;
+        if (!applyAngle) transform.rotation = Quaternion.identity;
     }
 
     void OnTriggerEnter2D(Collider2D other)
