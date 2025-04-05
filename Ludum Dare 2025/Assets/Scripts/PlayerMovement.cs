@@ -123,14 +123,26 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        HandleDamager(other);
+        HandleEnemy(other);
+    }
+
+    void HandleEnemy(Collider2D other)
+    {
+        if (!dashing) return;
+        if (!other.CompareTag("Enemy")) return;
+        
+        CurrentDashes++;
+    }
+
+    void HandleDamager(Collider2D other)
+    {
         if (dashing) return;
         if (iFramesCounter > 0) return;
-        if (other.CompareTag("Damager")) damaged = true;
-
-        Debug.Log(transform.position.x - other.transform.position.x);
-
+        if (!other.CompareTag("Damager")) return;
+        
+        damaged = true;
         damagedDirection = Mathf.Sign(transform.position.x - other.transform.position.x);
-
         iFramesCounter = iFramesTime;
     }
 }
