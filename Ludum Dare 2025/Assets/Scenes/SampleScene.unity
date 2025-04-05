@@ -571,9 +571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b63a735bc54255c1962bb83dfa43e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wall1: {fileID: 0}
-  wall2: {fileID: 1262585640}
-  wall3: {fileID: 231393581}
 --- !u!4 &554952029
 Transform:
   m_ObjectHideFlags: 0
@@ -1908,7 +1905,7 @@ GameObject:
   - component: {fileID: 1946604960}
   m_Layer: 0
   m_Name: Static Sprite
-  m_TagString: Damager
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
