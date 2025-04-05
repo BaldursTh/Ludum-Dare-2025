@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public bool Attacking { get; private set; } = false;
+    [SerializeField] public bool Attacking = false;
     [SerializeField] private Rigidbody2D rb;
     [Header("Player Stats")]
     [SerializeField] private float XSpeed = 5f;
@@ -40,8 +42,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private EffectData deathEffect;
     [SerializeField] private EffectData dashEffect;
     [SerializeField] private EffectData stompEffect;
-    [SerializeField] private EffectData descentEffect;
-    [SerializeField] private EffectData descentEffectMax;
+    [SerializeField] private ParticleSystem descentEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
         deathScreen.SetActive(false);
         CurrentDashes = MaxDashes;
         Time.timeScale = 1;
+        InitDescentEffect();
+        StopDescentEffect();
     }
 
     float inputHorizontal = 0;
@@ -79,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && CurrentDashes > 0)
         {
+            StartDashEffect();
             CurrentDashes--;
             dashing = true;
             currentDashTime = dashTime;
@@ -119,11 +123,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (inputVertical < -0.1f)
         {
+            DescentEffect();
             flipAngle = true;
             ren.flipX = false;
             return "Dive";
         }
-        else if (Mathf.Abs(inputHorizontal) > 0.1f) return "Fall Directional";
+        StopDescentEffect();
+        if (Mathf.Abs(inputHorizontal) > 0.1f) return "Fall Directional";
         else return "Idle Fall";
     }
 
@@ -142,14 +148,16 @@ public class PlayerMovement : MonoBehaviour
             Time.fixedDeltaTime * XAcceleration);
 
         //Handle Dash
-        if (dashing)
+        if (dashing) {
             targetXVelocity = dashSpeed * dashDirection;
 
-        currentDashTime -= Time.fixedDeltaTime;
+            currentDashTime -= Time.fixedDeltaTime;
 
-        if (currentDashTime < 0f)
-        {
-            dashing = false;
+            if (currentDashTime < 0f)
+            {
+                StopDashEffect();
+                dashing = false;
+            }
         }
 
         //Handle Vertical Movement
@@ -219,8 +227,34 @@ public class PlayerMovement : MonoBehaviour
         if (transform.position.y > threshold) Death();
     }
     void AttackCheck() {
-        if (rb.velocity.y >= attackSpeedThreshold) Attacking = true;
-        else Attacking = false;
+        if (Mathf.Abs(rb.velocity.y) >= attackSpeedThreshold) {
+            Attacking = true;
+            return;
+        }
+        Attacking = false;
+
+    }
+    float defaultRate;
+    float defaultLifetime;
+    void InitDescentEffect() {
+        var emission = descentEffect.emission;
+        defaultRate = emission.rateOverTimeMultiplier;
+        var main = descentEffect.main;
+        defaultLifetime = main.startLifetimeMultiplier;
+    }
+    void DescentEffect() {
+        float rate = Mathf.Clamp(attackSpeedThreshold - Mathf.Abs(rb.velocity.y), 1f, Mathf.Infinity);
+        var emission = descentEffect.emission;
+        emission.rateOverTimeMultiplier = defaultRate / Mathf.Sqrt(rate);
+        var main = descentEffect.main;
+        main.startLifetimeMultiplier = defaultLifetime / Mathf.Sqrt(rate);
+        if (Attacking) main.startColor = Color.red;
+        else main.startColor = Color.white;
+    }
+
+    void StopDescentEffect() {
+        var emission = descentEffect.emission;
+        emission.rateOverTimeMultiplier = 0;
     }
 
     void Death() {
@@ -230,11 +264,12 @@ public class PlayerMovement : MonoBehaviour
         effectHandler.CreateEffect(deathEffect, transform.position, Quaternion.identity);
     }
 
+    GameObject dash;
     void StartDashEffect() {
-
+        dash = effectHandler.CreateEffect(dashEffect, transform);
     }
 
     void StopDashEffect() {
-
+        effectHandler.DestroyEffect(dash);
     }
 }
