@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public bool Attacking {get; private set;} = false;
+    public bool Attacking { get; private set; } = false;
     [SerializeField] private Rigidbody2D rb;
     [Header("Player Stats")]
-    [SerializeField] private float HSpeed = 5f;
-    [SerializeField] private float HAcceleration = 3f;
+    [SerializeField] private float XSpeed = 5f;
+    [SerializeField] private float XAcceleration = 3f;
+
+    [SerializeField] private float YSpeedCap, YFallSpeedCap, YFloatSpeedCap = 5f;
+    [SerializeField] private float Gravity = -9.8f;
+    [SerializeField] private float YAcceleration = 50f;
     // Start is called before the first frame update
     void Start()
     {
-        rb.GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     float inputHorizontal = 0;
@@ -21,25 +25,42 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         inputHorizontal = Input.GetAxisRaw("Horizontal");
-        inputVertical = Input.GetAxisRaw("Horizontal");
+        inputVertical = Input.GetAxisRaw("Vertical");
     }
 
     void FixedUpdate()
     {
-        //Hande Horizontal Movement
-        float targetSpeed = HSpeed;
-        float targetAcceleration = HAcceleration;
+        //Handle Horizontal Movement
+        float targetAcceleration = XAcceleration;
 
-        Vector2 targetVelocity = new Vector2(inputHorizontal,0)*HSpeed;
+        float targetXVelocity = inputHorizontal * XSpeed;
 
+        float velocityX = rb.velocity.x;
+        targetXVelocity = Mathf.Lerp(
+            velocityX,
+            targetXVelocity,
+            Time.fixedDeltaTime * XAcceleration);
 
+        //Handle Vertical Movement
+        float targetYVelocity = rb.velocity.y + Gravity * Time.fixedDeltaTime;
+        float velocityY = rb.velocity.y;
+
+        float currentYSpeedCap = YSpeedCap;
+
+        if(inputVertical <= -0.1f) currentYSpeedCap = YFloatSpeedCap;
+        if(inputVertical >= 0.1f) currentYSpeedCap = YFallSpeedCap;
+
+        if (Mathf.Abs(rb.velocity.y) >= currentYSpeedCap)
+        {
+            targetYVelocity = Mathf.Lerp(
+                velocityY,
+                currentYSpeedCap * Mathf.Sign(rb.velocity.y),
+                Time.fixedDeltaTime * YAcceleration);
+        }
 
         //Update Velocity
-        Vector2 velocity = rb.velocity;
+        rb.velocity = new Vector2(targetXVelocity, targetYVelocity);
 
-            rb.velocity = Vector2.Lerp(
-                velocity,
-                targetVelocity,
-                Time.fixedDeltaTime * targetAcceleration);
+        Debug.Log(rb.velocity);
     }
 }
