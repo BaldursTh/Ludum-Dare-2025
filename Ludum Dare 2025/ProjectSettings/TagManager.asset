@@ -7,11 +7,13 @@ TagManager:
   - World
   - Enemy
   - Damager
+  - Edge
+  - Mover
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 

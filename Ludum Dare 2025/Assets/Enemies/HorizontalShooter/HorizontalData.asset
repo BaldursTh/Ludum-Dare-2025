@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HorizontalData
   m_EditorClassIdentifier: 
   bullet: {fileID: 11400000, guid: 687891e999d41c34382cdd4078e7b6a7, type: 2}
-  bulletSpeed: 10
+  bulletSpeed: 30
   bulletInterval: 2

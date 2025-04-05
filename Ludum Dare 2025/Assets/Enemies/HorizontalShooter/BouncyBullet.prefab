@@ -100,7 +100,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -114,7 +114,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -132,9 +132,10 @@ GameObject:
   - component: {fileID: 4557534541013446228}
   - component: {fileID: 4068471486757628564}
   - component: {fileID: 3508997546035082088}
-  - component: {fileID: 6604333893248182022}
+  - component: {fileID: 1044920955874280245}
+  - component: {fileID: 1934750033057416124}
   m_Layer: 3
-  m_Name: Bullet
+  m_Name: BouncyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,7 +187,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 63efe9773b976884ca22e442f2269ca3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -209,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a64d1bc370910645852e918623aec1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6604333893248182022
+--- !u!114 &1044920955874280245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,3 +223,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyEffect: {fileID: 11400000, guid: 6c294e7738bc1674c94b424148e4e036, type: 2}
+--- !u!114 &1934750033057416124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402439542415332567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157c74babd5a55e4e92c2db1b4d275e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRebounds: 3
+  reboundEffect: {fileID: 11400000, guid: 6c294e7738bc1674c94b424148e4e036, type: 2}
