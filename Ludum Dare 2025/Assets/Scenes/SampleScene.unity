@@ -472,12 +472,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1232336051}
   XSpeed: 5
-  XAcceleration: 3
+  XAcceleration: 6
   YSpeedCap: 4
   YFallSpeedCap: 100
   YFloatSpeedCap: 2
   Gravity: -9.8
   YAcceleration: 5
+  MaxDashes: 3
+  dashSpeed: 20
+  dashTime: 0.15
+  currentDashTime: 0.3
 --- !u!50 &1232336051
 Rigidbody2D:
   serializedVersion: 4
