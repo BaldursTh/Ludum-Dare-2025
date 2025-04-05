@@ -16,6 +16,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float YFloatSpeedCap = 2.6f;
     [SerializeField] private float Gravity = -9.8f;
     [SerializeField] private float YAcceleration = 50f;
+    [Header("Damage")]
+    [SerializeField] private float damageFlingY = 5f;
+    [SerializeField] private float damageFlingX = 9f;
+    [SerializeField] private float iFramesTime = 2f;
+    private float iFramesCounter = 0f;
 
     [Header("Dashes")]
     [SerializeField] private int MaxDashes = 3;
@@ -34,10 +39,14 @@ public class PlayerMovement : MonoBehaviour
     float inputHorizontal = 0;
     float inputVertical = 0;
     bool dashing = false;
+    bool damaged = false;
+    float damagedDirection = 0f;
 
     // Update is called once per frame
     void Update()
     {
+        iFramesCounter -= Time.deltaTime;
+
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
 
@@ -87,12 +96,21 @@ public class PlayerMovement : MonoBehaviour
         if (inputVertical <= -0.1f) currentYSpeedCap = YFallSpeedCap;
         if (inputVertical >= 0.1f) currentYSpeedCap = YFloatSpeedCap;
 
-        if (Mathf.Abs(rb.velocity.y) >= currentYSpeedCap)
+        if (-rb.velocity.y >= currentYSpeedCap)
         {
             targetYVelocity = Mathf.Lerp(
                 velocityY,
                 currentYSpeedCap * Mathf.Sign(rb.velocity.y),
                 Time.fixedDeltaTime * YAcceleration);
+        }
+
+        //Handle Damage
+        if (damaged)
+        {
+            Debug.LogWarning(damaged);
+            damaged = false;
+            targetYVelocity = damageFlingY;
+            targetXVelocity = damageFlingX * damagedDirection;
         }
 
         //Update Velocity
@@ -101,5 +119,30 @@ public class PlayerMovement : MonoBehaviour
         //Update Rotation
         float targetAngle = -180 / (2 * Mathf.PI) * Mathf.Atan(targetXVelocity / targetYVelocity); //includes converstion to degrees
         transform.eulerAngles = new Vector3(0, 0, targetAngle);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        HandleDamager(other);
+        HandleEnemy(other);
+    }
+
+    void HandleEnemy(Collider2D other)
+    {
+        if (!dashing) return;
+        if (!other.CompareTag("Enemy")) return;
+        
+        CurrentDashes++;
+    }
+
+    void HandleDamager(Collider2D other)
+    {
+        if (dashing) return;
+        if (iFramesCounter > 0) return;
+        if (!other.CompareTag("Damager")) return;
+        
+        damaged = true;
+        damagedDirection = Mathf.Sign(transform.position.x - other.transform.position.x);
+        iFramesCounter = iFramesTime;
     }
 }
