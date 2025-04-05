@@ -47,8 +47,8 @@ public class PlayerMovement : MonoBehaviour
 
         float currentYSpeedCap = YSpeedCap;
 
-        if(inputVertical <= -0.1f) currentYSpeedCap = YFloatSpeedCap;
-        if(inputVertical >= 0.1f) currentYSpeedCap = YFallSpeedCap;
+        if(inputVertical <= -0.1f) currentYSpeedCap = YFallSpeedCap;
+        if(inputVertical >= 0.1f) currentYSpeedCap = YFloatSpeedCap;
 
         if (Mathf.Abs(rb.velocity.y) >= currentYSpeedCap)
         {
@@ -61,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
         //Update Velocity
         rb.velocity = new Vector2(targetXVelocity, targetYVelocity);
 
-        Debug.Log(rb.velocity);
+        //Update Rotation
+        float targetAngle = -180/(2*Mathf.PI)*Mathf.Atan(targetXVelocity/targetYVelocity); //includes converstion to degrees
+        transform.eulerAngles = new Vector3(0,0,targetAngle);
     }
 }
