@@ -10,7 +10,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float XSpeed = 5f;
     [SerializeField] private float XAcceleration = 3f;
 
-    [SerializeField] private float YSpeedCap, YFallSpeedCap, YFloatSpeedCap = 5f;
+    [Header("Vertical Movement")]
+    [SerializeField] private float YSpeedCap = 3.7f;
+    [SerializeField] private float YFallSpeedCap  = 7f;
+    [SerializeField] private float YFloatSpeedCap = 2.6f;
     [SerializeField] private float Gravity = -9.8f;
     [SerializeField] private float YAcceleration = 50f;
     // Start is called before the first frame update

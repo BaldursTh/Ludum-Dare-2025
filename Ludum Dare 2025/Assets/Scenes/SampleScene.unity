@@ -229,7 +229,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -473,9 +473,9 @@ MonoBehaviour:
   rb: {fileID: 1232336051}
   XSpeed: 5
   XAcceleration: 3
-  YSpeedCap: 3
-  YFallSpeedCap: 5
-  YFloatSpeedCap: 1
+  YSpeedCap: 4
+  YFallSpeedCap: 100
+  YFloatSpeedCap: 2
   Gravity: -9.8
   YAcceleration: 5
 --- !u!50 &1232336051
