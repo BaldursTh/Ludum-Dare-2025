@@ -6,9 +6,8 @@ public class LayoutSelector : MonoBehaviour
 {
     public List<LevelDescriptor> spawnableLevels = new();
     public LevelDescriptor beginning;
-    public float[] createdLevelHeights = new float[3];
+    public float[] createdLevelDepths = new float[3];
     private float depth;
-    private float nextDeleteDepth = 0f;
     private int nextDeleteIndex = 0;
 
     void Start()
@@ -19,32 +18,33 @@ public class LayoutSelector : MonoBehaviour
 
         SpawnLevel(spawnableLevels[Random.Range(0, spawnableLevels.Count)]);
         SpawnLevel(spawnableLevels[Random.Range(0, spawnableLevels.Count)]);
-
-        nextDeleteDepth = beginning.height;
-        nextDeleteIndex = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (-GameManager.instance.Distance <= nextDeleteDepth) return;
+        if (-GameManager.instance.Distance <= createdLevelDepths[nextDeleteIndex]) return;
 
         Destroy(transform.GetChild(0).gameObject);
-        nextDeleteIndex++;
-        if(nextDeleteIndex > 2) nextDeleteIndex = 0;
-        nextDeleteDepth += createdLevelHeights[nextDeleteIndex];
 
         SpawnLevel(spawnableLevels[Random.Range(0, spawnableLevels.Count)]);
+    }
+
+    private void IncrementIndex()
+    {
+        nextDeleteIndex++;
+        if (nextDeleteIndex > 2) nextDeleteIndex = 0;
     }
 
     void SpawnLevel(LevelDescriptor level)
     {
         Instantiate(level.scene, new Vector3(0, -depth, 0), Quaternion.identity, transform);
+        Debug.LogWarning(level.height);
         depth += level.height;
 
-        createdLevelHeights[nextDeleteIndex] = level.height;
-        nextDeleteIndex++;
-        if(nextDeleteIndex > 2) nextDeleteIndex = 0;
+        createdLevelDepths[nextDeleteIndex] = depth;
+
+        IncrementIndex();
     }
 }
 
