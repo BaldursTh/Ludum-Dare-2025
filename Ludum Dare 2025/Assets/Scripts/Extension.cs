@@ -51,4 +51,9 @@ public static class Extension
         if (dist > range) return false;
         return true;
     }
+    public static int CircleInBounds(this int adder, int bound) {
+        adder += 1;
+        if (adder >= bound) adder = 0;
+        return adder;
+    }
 }

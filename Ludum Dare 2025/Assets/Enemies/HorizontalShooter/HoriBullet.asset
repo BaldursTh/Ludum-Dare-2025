@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b4f5535339a3643a5319a4dd6cea3f, type: 3}
   m_Name: HoriBullet
   m_EditorClassIdentifier: 
-  Effect: {fileID: 8402439542415332567, guid: 9f58515773a15d842b893fc3d3c2ed85, type: 3}
+  Effect: {fileID: 8402439542415332567, guid: 82885e3b633489849bc1d1726ac5737d, type: 3}
   startDelay: 0
-  duration: 2
+  duration: 20
