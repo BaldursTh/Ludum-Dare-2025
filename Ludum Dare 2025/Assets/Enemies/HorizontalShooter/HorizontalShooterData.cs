@@ -8,6 +8,5 @@ public class HorizontalShooterData : ScriptableObject
     public EffectData bullet;
     public float bulletSpeed;
     public float bulletInterval;
-    public Vector2 direction;
 
 }

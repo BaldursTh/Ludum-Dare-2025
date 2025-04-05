@@ -13,7 +13,7 @@ public class Damager : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player") {
+        if (collision.tag == "Player" || collision.tag == "World") {
             effectHandler.CreateEffect(destroyEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }

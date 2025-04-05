@@ -14,6 +14,8 @@ public abstract class Enemy : MonoBehaviour
     }
     public void OnDeath() {
         effectHandler.CreateEffect(enemyData.deathEffect, transform.position, Quaternion.identity);
+        StopAllCoroutines();
+        Destroy(gameObject);
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
