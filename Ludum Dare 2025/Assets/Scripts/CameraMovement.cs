@@ -6,6 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private float Acceleration = 0.1f;
     [SerializeField] private float StartingSpeed = 3f;
+    [SerializeField] private float FollowHeight = 2f;
     private float speed = 0;
     [SerializeField] private Transform player;
 
@@ -22,8 +23,8 @@ public class CameraMovement : MonoBehaviour
         float targetSpeed = speed;
 
         Debug.Log(player.position.y-transform.position.y);
-        if(player.position.y-transform.position.y < -1f)
-            targetSpeed = speed+Mathf.Pow(player.position.y-transform.position.y,2);
+        if(player.position.y-transform.position.y < FollowHeight)
+            targetSpeed = speed+Mathf.Pow(FollowHeight+transform.position.y-player.position.y,System.MathF.E);
 
         transform.position += new Vector3(0,-targetSpeed*Time.fixedDeltaTime,0);
     }
