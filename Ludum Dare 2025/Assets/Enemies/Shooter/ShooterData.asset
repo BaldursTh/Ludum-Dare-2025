@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 998b3403787cd1049923ca6babc4a8c6, type: 3}
-  m_Name: HorizontalData
+  m_Name: ShooterData
   m_EditorClassIdentifier: 
   bullet: {fileID: 11400000, guid: 687891e999d41c34382cdd4078e7b6a7, type: 2}
   bulletSpeed: 30

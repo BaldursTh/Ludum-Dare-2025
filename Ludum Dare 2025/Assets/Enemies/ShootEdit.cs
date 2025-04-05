@@ -5,6 +5,6 @@ using UnityEngine;
 public abstract class ShootEdit : MonoBehaviour
 {
     [HideInInspector]
-    public HorizontalShooter shooter;
+    public Shooter shooter;
     public abstract void doEdit(GameObject bullet);
 }

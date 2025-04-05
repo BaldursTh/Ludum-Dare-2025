@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Stats")]
     [SerializeField] private float XSpeed = 5f;
     [SerializeField] private float XAcceleration = 3f;
+    [SerializeField] private float attackSpeedThreshold = 10;
 
     [Header("Vertical Movement")]
     [SerializeField] private float YSpeedCap = 3.7f;
@@ -34,13 +35,24 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator animator;
     private SpriteRenderer ren;
+    [SerializeField] private GameObject deathScreen;
+    private EffectHandler effectHandler;
+    [SerializeField] private EffectData deathEffect;
+    [SerializeField] private EffectData dashEffect;
+    [SerializeField] private EffectData stompEffect;
+    [SerializeField] private EffectData descentEffect;
+    [SerializeField] private EffectData descentEffectMax;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         ren = GetComponentInChildren<SpriteRenderer>();
+        effectHandler = gameObject.AddComponent<EffectHandler>();
+        if (deathScreen == null )deathScreen = GameObject.FindGameObjectWithTag("DeathScreen");
+        deathScreen.SetActive(false);
         CurrentDashes = MaxDashes;
+        Time.timeScale = 1;
     }
 
     float inputHorizontal = 0;
@@ -71,6 +83,9 @@ public class PlayerMovement : MonoBehaviour
             dashing = true;
             currentDashTime = dashTime;
         }
+
+        DeathCheck();
+        AttackCheck();
     }
     bool flipAngle = false;
     bool applyAngle = true;
@@ -197,5 +212,29 @@ public class PlayerMovement : MonoBehaviour
         damaged = true;
         damagedDirection = Mathf.Sign(transform.position.x - other.transform.position.x);
         iFramesCounter = iFramesTime;
+    }
+
+    void DeathCheck() {
+        float threshold = Camera.main.transform.position.y + Camera.main.orthographicSize + transform.lossyScale.y;
+        if (transform.position.y > threshold) Death();
+    }
+    void AttackCheck() {
+        if (rb.velocity.y >= attackSpeedThreshold) Attacking = true;
+        else Attacking = false;
+    }
+
+    void Death() {
+        deathScreen.SetActive(true);
+        gameObject.SetActive(false);
+        Camera.main.GetComponent<CameraMovement>().enabled = false;
+        effectHandler.CreateEffect(deathEffect, transform.position, Quaternion.identity);
+    }
+
+    void StartDashEffect() {
+
+    }
+
+    void StopDashEffect() {
+
     }
 }

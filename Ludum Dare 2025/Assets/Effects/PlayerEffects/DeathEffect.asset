@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82b4f5535339a3643a5319a4dd6cea3f, type: 3}
-  m_Name: HoriBullet
+  m_Name: DeathEffect
   m_EditorClassIdentifier: 
-  Effect: {fileID: 8402439542415332567, guid: 82885e3b633489849bc1d1726ac5737d, type: 3}
+  Effect: {fileID: 688126211867391640, guid: 060f41b0a42ca394a8a0c597ff140c7c, type: 3}
   startDelay: 0
-  duration: 20
+  duration: 4

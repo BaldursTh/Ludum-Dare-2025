@@ -5,9 +5,9 @@ using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class HorizontalShooter : Enemy
+public class Shooter : Enemy
 {
-    public HorizontalShooterData data;
+    public ShooterData data;
     public GameObject shootPlace;
     public List<ShootEdit> edits = new List<ShootEdit>();
     public List<GameObject> bullets = new List<GameObject>();

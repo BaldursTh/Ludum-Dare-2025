@@ -5,7 +5,7 @@ using UnityEngine;
 public class MortarEdit : ShootEdit
 {
     public float gravityScale;
-    public HorizontalShooterData data;
+    public ShooterData data;
     public override void doEdit(GameObject bullet)
     {
         shooter.changeVelocity(getMortarVelocity);
