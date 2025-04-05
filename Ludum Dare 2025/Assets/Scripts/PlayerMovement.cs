@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -29,10 +30,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float currentDashTime = 0.3f;
     private int dashDirection = 1;
     public int CurrentDashes { get; private set; } = 3;
+
+
+    private Animator animator;
+    private SpriteRenderer ren;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        ren = GetComponentInChildren<SpriteRenderer>();
         CurrentDashes = MaxDashes;
     }
 
@@ -40,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     float inputVertical = 0;
     bool dashing = false;
     bool damaged = false;
+    bool damaging = false;
     float damagedDirection = 0f;
 
     // Update is called once per frame
@@ -49,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
 
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
+
+        Animate();
+
 
         if (dashing) return;
         if (inputHorizontal <= -0.1f) dashDirection = -1;
@@ -60,6 +71,39 @@ public class PlayerMovement : MonoBehaviour
             dashing = true;
             currentDashTime = dashTime;
         }
+    }
+    bool flipAngle = false;
+    bool applyAngle = true;
+    void Animate()
+    {
+        flipAngle = false;
+        applyAngle = true;
+        ren.flipX = inputHorizontal < 0;
+
+        string targetAnimation = "Idle Fall";
+        if (damaging)
+        {
+            applyAngle = false;
+            targetAnimation = "Hurt";
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+            damaging = false;
+        }
+        else if (dashing) targetAnimation = "Dash";
+        else if (inputVertical > 0.1f)
+        {
+            if (Mathf.Abs(inputHorizontal) > 0.1f) targetAnimation = "Float Direction";
+            else targetAnimation = "Float";
+        }
+        else if (inputVertical < -0.1f)
+        {
+            flipAngle = true;
+            targetAnimation = "Dive";
+            ren.flipX = false;
+        }
+        else if (Mathf.Abs(inputHorizontal) > 0.1f) targetAnimation = "Fall Directional";
+        else targetAnimation = "Idle Fall";
+        
+        if(!animator.GetCurrentAnimatorStateInfo(0).IsName(targetAnimation)) animator.Play(targetAnimation);
     }
 
     void FixedUpdate()
@@ -109,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogWarning(damaged);
             damaged = false;
+            damaging = true;
             targetYVelocity = damageFlingY;
             targetXVelocity = damageFlingX * damagedDirection;
         }
@@ -117,8 +162,10 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(targetXVelocity, targetYVelocity);
 
         //Update Rotation
-        float targetAngle = -180 / (2 * Mathf.PI) * Mathf.Atan(targetXVelocity / targetYVelocity); //includes converstion to degrees
+        float targetAngle = 180 / (2 * Mathf.PI) * Mathf.Atan(targetXVelocity / targetYVelocity); //includes converstion to degrees
+        if (flipAngle) targetAngle = -targetAngle;
         transform.eulerAngles = new Vector3(0, 0, targetAngle);
+        if(!applyAngle) transform.rotation = Quaternion.identity;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -131,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!dashing) return;
         if (!other.CompareTag("Enemy")) return;
-        
+
         CurrentDashes++;
     }
 
@@ -140,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
         if (dashing) return;
         if (iFramesCounter > 0) return;
         if (!other.CompareTag("Damager")) return;
-        
+
         damaged = true;
         damagedDirection = Mathf.Sign(transform.position.x - other.transform.position.x);
         iFramesCounter = iFramesTime;
