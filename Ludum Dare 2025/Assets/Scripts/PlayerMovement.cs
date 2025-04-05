@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Damage")]
     [SerializeField] private float damageFlingY = 5f;
     [SerializeField] private float damageFlingX = 9f;
+    [SerializeField] private float iFramesTime = 2f;
+    private float iFramesCounter = 0f;
 
     [Header("Dashes")]
     [SerializeField] private int MaxDashes = 3;
@@ -43,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        iFramesCounter -= Time.deltaTime;
+
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
 
@@ -120,10 +124,13 @@ public class PlayerMovement : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (dashing) return;
+        if (iFramesCounter > 0) return;
         if (other.CompareTag("Damager")) damaged = true;
 
         Debug.Log(transform.position.x - other.transform.position.x);
 
         damagedDirection = Mathf.Sign(transform.position.x - other.transform.position.x);
+
+        iFramesCounter = iFramesTime;
     }
 }
