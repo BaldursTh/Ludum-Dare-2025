@@ -43,8 +43,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject deathScreen;
     private EffectHandler effectHandler;
     [SerializeField] private EffectData deathEffect;
-    [SerializeField] private EffectData dashEffect;
     [SerializeField] private EffectData stompEffect;
+    [SerializeField] private EffectData stompDamager;
     [SerializeField] private ParticleSystem descentEffect;
     // Start is called before the first frame update
     void Start()
@@ -215,7 +215,9 @@ public class PlayerMovement : MonoBehaviour
             rotatePoint.transform.eulerAngles = new Vector3(0, 0, targetAngle);
         }
     }
-
+    public bool getDash() {
+        return dashing;
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         HandleDamager(other);
@@ -238,6 +240,7 @@ public class PlayerMovement : MonoBehaviour
         if (!Attacking) return;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, 1 << 0);
         effectHandler.CreateEffect(stompEffect, hit.point, Quaternion.identity);
+        effectHandler.CreateEffect(stompDamager, hit.point, Quaternion.identity);
     }
 
     void HandleDamager(Collider2D other)

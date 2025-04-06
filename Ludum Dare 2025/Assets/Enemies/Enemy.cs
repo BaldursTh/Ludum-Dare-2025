@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Player" && other.gameObject.GetComponent<PlayerMovement>().Attacking) {
+        if (other.tag == "Player" && (other.gameObject.GetComponent<PlayerMovement>().Attacking ||other.gameObject.GetComponent<PlayerMovement>().getDash())) {
             OnDeath();
         }
         if (other.tag == "PlayerDamager") {

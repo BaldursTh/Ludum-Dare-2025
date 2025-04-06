@@ -11,6 +11,6 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public void SpawnEnemy() {
-        Instantiate(enemyList.getRandomEnemy(), transform.position, Quaternion.identity);
+        Instantiate(enemyList.getRandomEnemy(), transform);
     }
 }
