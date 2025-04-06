@@ -303,12 +303,13 @@ public class PlayerMovement : MonoBehaviour
         effectHandler.CreateEffect(deathEffect, transform.position, Quaternion.identity);
     }
 
-    GameObject dash;
+    [SerializeField] ParticleSystem dash;
     void StartDashEffect() {
-        dash = effectHandler.CreateEffect(dashEffect, transform);
+        dash.transform.localScale = new Vector3(dashDirection,1,1);
+        dash.Play();
     }
 
     void StopDashEffect() {
-        effectHandler.DestroyEffect(dash);
+        dash.Stop();
     }
 }
