@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class EnemyAnimations : MonoBehaviour
@@ -8,6 +9,7 @@ public class EnemyAnimations : MonoBehaviour
     public GameObject gunRotater;
     public SpriteRenderer ratRend;
     public SpriteRenderer gunRend;
+    GameObject player;
     Rigidbody2D rb;
     bool flipAngle;
     public float shootRecoil;
@@ -17,7 +19,8 @@ public class EnemyAnimations : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         ratRend = GetComponentInChildren<SpriteRenderer>();
-        gunRotater = gameObject.GetChildWithTag("GunRotater");
+        gunRotater = transform.GetChild(0).gameObject.GetChildWithTag("GunPivot");
+        player = GameObject.FindGameObjectWithTag("Player");
         if (gunRotater == null) return;
         doShoot = DoShoot();
         gunRend = gunRotater.GetComponentInChildren<SpriteRenderer>();
@@ -25,17 +28,16 @@ public class EnemyAnimations : MonoBehaviour
 
     void Animate()
     {
-        flipAngle = false;
 
         string targetAnimation = GetAnimation();
 
-        ratRend.flipX = !flipAngle;
 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName(targetAnimation)) animator.Play(targetAnimation);
     }
 
     public void AnimatorShoot() {
         StopCoroutine(doShoot);
+        doShoot = DoShoot();
         StartCoroutine(doShoot);
     }
     IEnumerator doShoot;
@@ -43,36 +45,47 @@ public class EnemyAnimations : MonoBehaviour
     IEnumerator DoShoot() {
         isShooting = true;
         GameObject child = gunRotater.transform.GetChild(0).gameObject;
-        Vector3 start = child.transform.position;
-        Vector3 end = child.transform.position + (-gunRotater.transform.right * shootRecoilDistance);
-        while ((child.transform.position - end).magnitude > 0.01f) {
-            Vector3 newPosition = Vector3.MoveTowards(child.transform.position, end, shootRecoil);
-            rb.MovePosition(newPosition);
+        Vector3 start = child.transform.localPosition;
+        Vector3 end = child.transform.localPosition + (-gunRotater.transform.right * shootRecoilDistance);
+        while ((child.transform.localPosition - end).magnitude > 0.01f) {
+            child.transform.localPosition = Vector3.MoveTowards(child.transform.localPosition, end, shootRecoil);
             yield return null;
         }
-        while ((child.transform.position - start).magnitude > 0.01f) {
-            Vector3 newPosition = Vector3.MoveTowards(child.transform.position, start, shootRecoil);
-            rb.MovePosition(newPosition);
+        while ((child.transform.localPosition - start).magnitude > 0.01f) {
+            child.transform.localPosition = Vector3.MoveTowards(child.transform.localPosition, start, shootRecoil);
             yield return null;
         }
         isShooting = false;
     }
 
-    public void RotateGun(Quaternion rotation) {
+    public void RotateGun(Quaternion newRotation) {
         if (isShooting) return;
-        gunRotater.transform.rotation = rotation;
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        gunRotater.transform.rotation = newRotation;
+
         if (player == null) return;
         Vector3 playerDir = player.transform.position - transform.position;
-        if (playerDir.x < 0) gunRend.flipY = true;
-        else gunRend.flipY = false;
+        if (playerDir.x < 0) FlipX(1);
+        else FlipX(0);
+    }
+
+    public void FlipX(int flip) {
+        if (ratRend == null) return;
+        Vector3 scale = ratRend.transform.parent.localScale;
+        if (flip == 2) ratRend.transform.parent.localScale = new Vector3(-scale.x, scale.y, scale.z);
+        float newScale = Mathf.Abs(scale.x);
+        if (flip == 0) ratRend.transform.parent.localScale = new Vector3(newScale, scale.y, scale.z);
+        if (flip == 1) ratRend.transform.parent.localScale = new Vector3(-newScale, scale.y, scale.z);
+    }
+
+    public bool isFlipped() {
+        Vector3 scale = ratRend.transform.parent.localScale;
+        return scale.x == -1;
     }
 
     string GetAnimation()
     {
         if (Mathf.Abs(rb.velocity.x) > 0.01f) {
-            if (rb.velocity.x < 0) flipAngle = true;
             return "Move";
         }
         return "Idle";

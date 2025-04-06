@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: BasicPlatformSpawner
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 4831201037215100159, guid: 22fc8755f6048e848b7f657e7695cb39, type: 3}
-  - {fileID: 3115824364103260214, guid: ff9c0577fde1bdc4896a9169f9b174ff, type: 3}
-  - {fileID: 4831201037215100159, guid: bfea7ca4457d72143ba6f70a6249a7e9, type: 3}
-  - {fileID: 5825108570212347962, guid: 69bbb91fa42039b43a1f9e19860ae896, type: 3}
+  - {fileID: 4584602738478093413, guid: 22fc8755f6048e848b7f657e7695cb39, type: 3}

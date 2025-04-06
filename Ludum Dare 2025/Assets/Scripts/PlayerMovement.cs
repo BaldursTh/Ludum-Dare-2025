@@ -33,7 +33,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashSpeed = 10f;
     [SerializeField] private float dashTime = 0.3f;
     [SerializeField] private float currentDashTime = 0.3f;
-    private int dashDirection = 1;
+    private int dashDirectionX = 1;
+    private int dashDirectionY = -1;
     public int CurrentDashes { get; private set; } = 3;
 
 
@@ -81,8 +82,13 @@ public class PlayerMovement : MonoBehaviour
 
 
         if (dashing) return;
-        if (inputHorizontal <= -0.1f) dashDirection = -1;
-        if (inputHorizontal >= 0.1f) dashDirection = 1;
+
+        if (inputHorizontal <= -0.1f) dashDirectionX = -1;
+        else dashDirectionX = 1;
+
+        if (inputVertical <= -0.1f) dashDirectionY = -1;
+        // else if (inputVertical >= 0.1f) dashDirectionY = 1;
+        else dashDirectionY = 0;
 
         if (Input.GetButtonDown("Jump") && CurrentDashes > 0)
         {
@@ -161,10 +167,10 @@ public class PlayerMovement : MonoBehaviour
         //Handle Dash
         if (dashing)
         {
-            targetXVelocity = dashSpeed * dashDirection;
+            targetXVelocity = dashSpeed * dashDirectionX;
 
             currentDashTime -= Time.fixedDeltaTime;
-            targetYVelocity = 0;
+            targetYVelocity = dashDirectionY * dashSpeed;
             if (currentDashTime < 0f)
             {
                 StopDashEffect();
@@ -327,7 +333,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem dash;
     void StartDashEffect()
     {
-        dash.transform.localScale = new Vector3(dashDirection, 1, 1);
+        dash.transform.localScale = new Vector3(dashDirectionX, 1, 1);
         dash.Play();
     }
 

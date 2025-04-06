@@ -31,6 +31,7 @@ public class Shooter : Enemy
             Rigidbody2D rb = bullet.GetComponentInChildren<Rigidbody2D>();
             rb.velocity = getVelocity(bullet);
         });
+        GetComponent<EnemyAnimations>().AnimatorShoot();
         this.Invoke(Shoot, data.bulletInterval);
     }
 
