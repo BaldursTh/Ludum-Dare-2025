@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         ren = GetComponentInChildren<SpriteRenderer>();
         effectHandler = gameObject.AddComponent<EffectHandler>();
-        if (deathScreen == null ) deathScreen = GameObject.FindGameObjectWithTag("DeathScreen");
+        if (deathScreen == null) deathScreen = GameObject.FindGameObjectWithTag("DeathScreen");
         deathScreen.SetActive(false);
         CurrentDashes = MaxDashes;
         Time.timeScale = 1;
@@ -90,6 +90,10 @@ public class PlayerMovement : MonoBehaviour
             CurrentDashes--;
             dashing = true;
             currentDashTime = dashTime;
+            if (REMOVETHISLATER)
+                tempDashVelocitySave = rb.velocity.y;
+            else
+                tempDashVelocitySave = 0;
         }
 
         DeathCheck();
@@ -104,8 +108,8 @@ public class PlayerMovement : MonoBehaviour
         ren.flipX = inputHorizontal < 0;
 
         string targetAnimation = GetAnimation();
-        if(damaging)
-        Debug.Log(damaging.ToString() + targetAnimation);
+        if (damaging)
+            Debug.Log(damaging.ToString() + targetAnimation);
 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName(targetAnimation)) animator.Play(targetAnimation);
     }
@@ -121,7 +125,8 @@ public class PlayerMovement : MonoBehaviour
             return "Hurt";
         }
         else if (dashing) return "Dash";
-        else if (floored) {
+        else if (floored)
+        {
             if (Mathf.Abs(inputHorizontal) > 0.1f) return "Walk";
             return "Idle";
         }
@@ -141,6 +146,8 @@ public class PlayerMovement : MonoBehaviour
         else return "Idle Fall";
     }
 
+    float tempDashVelocitySave = 0f;
+    public bool REMOVETHISLATER = true;
     void FixedUpdate()
     {
         //Handle Horizontal Movement
@@ -155,35 +162,40 @@ public class PlayerMovement : MonoBehaviour
             targetXVelocity,
             Time.fixedDeltaTime * XAcceleration);
 
+        float velocityY = rb.velocity.y;
+        float targetYVelocity = velocityY + Gravity * Time.fixedDeltaTime;
         //Handle Dash
-        if (dashing) {
+        if (dashing)
+        {
             targetXVelocity = dashSpeed * dashDirection;
 
             currentDashTime -= Time.fixedDeltaTime;
-
+            targetYVelocity = 0;
             if (currentDashTime < 0f)
             {
                 StopDashEffect();
                 dashing = false;
+                targetYVelocity = tempDashVelocitySave;
+            }
+        }
+        else
+        {
+            //Handle Vertical Movement
+
+            float currentYSpeedCap = YSpeedCap;
+
+            if (inputVertical <= -0.1f) currentYSpeedCap = YFallSpeedCap;
+            if (inputVertical >= 0.1f) currentYSpeedCap = YFloatSpeedCap;
+
+            if (-rb.velocity.y >= currentYSpeedCap)
+            {
+                targetYVelocity = Mathf.Lerp(
+                    velocityY,
+                    currentYSpeedCap * Mathf.Sign(rb.velocity.y),
+                    Time.fixedDeltaTime * YAcceleration);
             }
         }
 
-        //Handle Vertical Movement
-        float targetYVelocity = rb.velocity.y + Gravity * Time.fixedDeltaTime;
-        float velocityY = rb.velocity.y;
-
-        float currentYSpeedCap = YSpeedCap;
-
-        if (inputVertical <= -0.1f) currentYSpeedCap = YFallSpeedCap;
-        if (inputVertical >= 0.1f) currentYSpeedCap = YFloatSpeedCap;
-
-        if (-rb.velocity.y >= currentYSpeedCap)
-        {
-            targetYVelocity = Mathf.Lerp(
-                velocityY,
-                currentYSpeedCap * Mathf.Sign(rb.velocity.y),
-                Time.fixedDeltaTime * YAcceleration);
-        }
 
         //Handle Damage
         if (damaged)
@@ -201,10 +213,12 @@ public class PlayerMovement : MonoBehaviour
         //Update Rotation
         float targetAngle = 180 / (2 * Mathf.PI) * Mathf.Atan(targetXVelocity / targetYVelocity); //includes converstion to degrees
         if (flipAngle) targetAngle = -targetAngle;
-        if (!applyAngle || floored) {
+        if (!applyAngle || floored)
+        {
             rotatePoint.transform.rotation = Quaternion.identity;
         }
-        else {
+        else
+        {
             rotatePoint.transform.eulerAngles = new Vector3(0, 0, targetAngle);
         }
     }
@@ -222,7 +236,8 @@ public class PlayerMovement : MonoBehaviour
         floored = false;
     }
 
-    void HandleFloor(Collider2D other) {
+    void HandleFloor(Collider2D other)
+    {
         if (!other.CompareTag("World")) return;
 
         floored = true;
@@ -232,7 +247,8 @@ public class PlayerMovement : MonoBehaviour
         effectHandler.CreateEffect(stompEffect, hit.point, Quaternion.identity);
     }
 
-    void HandleDamager(Collider2D other) {
+    void HandleDamager(Collider2D other)
+    {
         if (!other.CompareTag("Damager")) return;
         TakeDamage(other);
     }
@@ -240,11 +256,13 @@ public class PlayerMovement : MonoBehaviour
     void HandleEnemy(Collider2D other)
     {
         if (!other.CompareTag("Enemy")) return;
-        if (dashing) {
+        if (dashing)
+        {
             CurrentDashes++;
             return;
         }
-        if (Attacking) {
+        if (Attacking)
+        {
             CurrentDashes++;
             return;
         }
@@ -261,12 +279,15 @@ public class PlayerMovement : MonoBehaviour
         iFramesCounter = iFramesTime;
     }
 
-    void DeathCheck() {
+    void DeathCheck()
+    {
         float threshold = Camera.main.transform.position.y + Camera.main.orthographicSize + transform.lossyScale.y;
         if (transform.position.y > threshold) Death();
     }
-    void AttackCheck() {
-        if (Mathf.Abs(rb.velocity.y) >= attackSpeedThreshold) {
+    void AttackCheck()
+    {
+        if (Mathf.Abs(rb.velocity.y) >= attackSpeedThreshold)
+        {
             Attacking = true;
             return;
         }
@@ -275,13 +296,15 @@ public class PlayerMovement : MonoBehaviour
     }
     float defaultRate;
     float defaultLifetime;
-    void InitDescentEffect() {
+    void InitDescentEffect()
+    {
         var emission = descentEffect.emission;
         defaultRate = emission.rateOverTimeMultiplier;
         var main = descentEffect.main;
         defaultLifetime = main.startLifetimeMultiplier;
     }
-    void DescentEffect() {
+    void DescentEffect()
+    {
         float rate = Mathf.Clamp(attackSpeedThreshold - Mathf.Abs(rb.velocity.y), 1f, Mathf.Infinity);
         var emission = descentEffect.emission;
         emission.rateOverTimeMultiplier = defaultRate / Mathf.Sqrt(rate);
@@ -291,12 +314,14 @@ public class PlayerMovement : MonoBehaviour
         else main.startColor = Color.white;
     }
 
-    void StopDescentEffect() {
+    void StopDescentEffect()
+    {
         var emission = descentEffect.emission;
         emission.rateOverTimeMultiplier = 0;
     }
 
-    void Death() {
+    void Death()
+    {
         deathScreen.SetActive(true);
         gameObject.SetActive(false);
         Camera.main.GetComponent<CameraMovement>().enabled = false;
@@ -304,12 +329,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     [SerializeField] ParticleSystem dash;
-    void StartDashEffect() {
-        dash.transform.localScale = new Vector3(dashDirection,1,1);
+    void StartDashEffect()
+    {
+        dash.transform.localScale = new Vector3(dashDirection, 1, 1);
         dash.Play();
     }
 
-    void StopDashEffect() {
+    void StopDashEffect()
+    {
         dash.Stop();
     }
 }
