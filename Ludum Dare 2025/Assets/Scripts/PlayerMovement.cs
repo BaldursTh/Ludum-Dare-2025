@@ -230,7 +230,6 @@ public class PlayerMovement : MonoBehaviour
         if (!Attacking) return;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, 1 << 0);
         effectHandler.CreateEffect(stompEffect, hit.point, Quaternion.identity);
-
     }
 
     void HandleDamager(Collider2D other) {
