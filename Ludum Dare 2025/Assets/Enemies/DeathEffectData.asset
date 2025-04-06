@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e1d272cbe61ce24ea94f647d99420c9, type: 3}
-  m_Name: EnemyData
+  m_Script: {fileID: 11500000, guid: 82b4f5535339a3643a5319a4dd6cea3f, type: 3}
+  m_Name: DeathEffectData
   m_EditorClassIdentifier: 
-  hitKnockback: 10
-  deathEffect: {fileID: 11400000, guid: 76c1f1ef35439f44baf4ac6bbd014acd, type: 2}
+  Effect: {fileID: 6518209428082733760, guid: 9cb526f6831000f4abb322f7ec8243b6, type: 3}
+  startDelay: 0
+  duration: 10

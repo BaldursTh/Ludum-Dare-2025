@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     public EnemyData enemyData;
     [HideInInspector]
     public EffectHandler effectHandler;
+    public Collider2D hitbox;
     public virtual void Start()
     {
         effectHandler = gameObject.AddComponent<EffectHandler>();
@@ -17,9 +18,8 @@ public abstract class Enemy : MonoBehaviour
         StopAllCoroutines();
         Destroy(gameObject);
     }
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player") {
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.tag == "Player" && other.gameObject.GetComponent<PlayerMovement>().Attacking) {
             OnDeath();
         }
     }

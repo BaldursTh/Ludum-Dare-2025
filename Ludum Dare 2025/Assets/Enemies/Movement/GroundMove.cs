@@ -20,6 +20,8 @@ public class GroundMove : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "World" || collision.tag == "Edge") {
+            SpriteRenderer rend = GetComponent<SpriteRenderer>();
+            rend.flipX = !rend.flipX;
             moveSpeed = -moveSpeed;
         }
     }

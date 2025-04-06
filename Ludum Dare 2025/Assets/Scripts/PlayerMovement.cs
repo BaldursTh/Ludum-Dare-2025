@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -108,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
 
     string GetAnimation()
     {
+        StopDescentEffect();
         if (damaging)
         {
             applyAngle = false;
@@ -128,8 +130,7 @@ public class PlayerMovement : MonoBehaviour
             ren.flipX = false;
             return "Dive";
         }
-        StopDescentEffect();
-        if (Mathf.Abs(inputHorizontal) > 0.1f) return "Fall Directional";
+        else if (Mathf.Abs(inputHorizontal) > 0.1f) return "Fall Directional";
         else return "Idle Fall";
     }
 
@@ -203,19 +204,31 @@ public class PlayerMovement : MonoBehaviour
         HandleEnemy(other);
     }
 
-    void HandleEnemy(Collider2D other)
-    {
-        if (!dashing) return;
-        if (!other.CompareTag("Enemy")) return;
-
-        CurrentDashes++;
+    void HandleDamager(Collider2D other) {
+        if (!other.CompareTag("Damager")) return;
+        TakeDamage(other);
     }
 
-    void HandleDamager(Collider2D other)
+    void HandleEnemy(Collider2D other)
+    {
+        if (!other.CompareTag("Enemy")) return;
+        if (dashing) {
+            CurrentDashes++;
+            return;
+        }
+        if (Attacking) {
+            CurrentDashes++;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, 1 << 0);
+            effectHandler.CreateEffect(stompEffect, hit.point, Quaternion.identity);
+            return;
+        }
+        TakeDamage(other);
+    }
+
+    void TakeDamage(Collider2D other)
     {
         if (dashing) return;
         if (iFramesCounter > 0) return;
-        if (!other.CompareTag("Damager")) return;
 
         damaged = true;
         damagedDirection = Mathf.Sign(transform.position.x - other.transform.position.x);

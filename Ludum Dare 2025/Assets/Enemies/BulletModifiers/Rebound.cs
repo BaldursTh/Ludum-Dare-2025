@@ -8,7 +8,7 @@ public class Rebound : MonoBehaviour
     int currentRebounds;
     EffectHandler effectHandler;
     public EffectData reboundEffect;
-    void Start()
+    void Awake()
     {
         effectHandler = gameObject.AddComponent<EffectHandler>();
         currentRebounds = maxRebounds;

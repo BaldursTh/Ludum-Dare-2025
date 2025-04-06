@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e1d272cbe61ce24ea94f647d99420c9, type: 3}
-  m_Name: EnemyData
+  m_Script: {fileID: 11500000, guid: 998b3403787cd1049923ca6babc4a8c6, type: 3}
+  m_Name: RebounderData
   m_EditorClassIdentifier: 
-  hitKnockback: 10
-  deathEffect: {fileID: 11400000, guid: 76c1f1ef35439f44baf4ac6bbd014acd, type: 2}
+  bullet: {fileID: 11400000, guid: c6d46d8b37bc9fa4d9ab31d489f556f9, type: 2}
+  bulletSpeed: 10
+  bulletInterval: 1.5
