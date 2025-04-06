@@ -22,5 +22,8 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Player" && other.gameObject.GetComponent<PlayerMovement>().Attacking) {
             OnDeath();
         }
+        if (other.tag == "PlayerDamager") {
+            OnDeath();
+        }
     }
 }

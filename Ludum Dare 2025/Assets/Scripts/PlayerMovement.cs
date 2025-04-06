@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator animator;
     private SpriteRenderer ren;
+    public GameObject rotatePoint;
     [SerializeField] private GameObject deathScreen;
     private EffectHandler effectHandler;
     [SerializeField] private EffectData deathEffect;
@@ -48,10 +50,10 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         ren = GetComponentInChildren<SpriteRenderer>();
         effectHandler = gameObject.AddComponent<EffectHandler>();
-        if (deathScreen == null )deathScreen = GameObject.FindGameObjectWithTag("DeathScreen");
+        if (deathScreen == null ) deathScreen = GameObject.FindGameObjectWithTag("DeathScreen");
         deathScreen.SetActive(false);
         CurrentDashes = MaxDashes;
         Time.timeScale = 1;
@@ -64,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
     bool dashing = false;
     bool damaged = false;
     bool damaging = false;
+    [SerializeField] bool floored = false;
     float damagedDirection = 0f;
 
     // Update is called once per frame
@@ -118,6 +121,10 @@ public class PlayerMovement : MonoBehaviour
             return "Hurt";
         }
         else if (dashing) return "Dash";
+        else if (floored) {
+            if (Mathf.Abs(inputHorizontal) > 0.1f) return "Walk";
+            return "Idle";
+        }
         else if (inputVertical > 0.1f)
         {
             if (Mathf.Abs(inputHorizontal) > 0.1f) return "Float Direction";
@@ -194,14 +201,36 @@ public class PlayerMovement : MonoBehaviour
         //Update Rotation
         float targetAngle = 180 / (2 * Mathf.PI) * Mathf.Atan(targetXVelocity / targetYVelocity); //includes converstion to degrees
         if (flipAngle) targetAngle = -targetAngle;
-        transform.eulerAngles = new Vector3(0, 0, targetAngle);
-        if (!applyAngle) transform.rotation = Quaternion.identity;
+        if (!applyAngle || floored) {
+            rotatePoint.transform.rotation = Quaternion.identity;
+        }
+        else {
+            rotatePoint.transform.eulerAngles = new Vector3(0, 0, targetAngle);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         HandleDamager(other);
         HandleEnemy(other);
+        HandleFloor(other);
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (!other.CompareTag("World")) return;
+        floored = false;
+    }
+
+    void HandleFloor(Collider2D other) {
+        if (!other.CompareTag("World")) return;
+
+        floored = true;
+
+        if (!Attacking) return;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, 1 << 0);
+        effectHandler.CreateEffect(stompEffect, hit.point, Quaternion.identity);
+
     }
 
     void HandleDamager(Collider2D other) {
@@ -218,8 +247,6 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Attacking) {
             CurrentDashes++;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, 1 << 0);
-            effectHandler.CreateEffect(stompEffect, hit.point, Quaternion.identity);
             return;
         }
         TakeDamage(other);
