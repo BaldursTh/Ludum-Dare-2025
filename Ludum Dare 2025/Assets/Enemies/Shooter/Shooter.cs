@@ -18,7 +18,7 @@ public class Shooter : Enemy
         base.Start();
         edits = GetComponents<ShootEdit>().ToList();
         edits.ForEach(edit => edit.shooter = this);
-        Shoot();
+        ShootLoop();
     }
     public void Shoot() {
         bullets = new List<GameObject>();
@@ -32,7 +32,11 @@ public class Shooter : Enemy
             rb.velocity = getVelocity(bullet);
         });
         GetComponent<EnemyAnimations>().AnimatorShoot();
-        this.Invoke(Shoot, data.bulletInterval);
+    }
+
+    public void ShootLoop() {
+        Shoot();
+        this.Invoke(ShootLoop, data.bulletInterval);
     }
 
     public GameObject addBullet() {
