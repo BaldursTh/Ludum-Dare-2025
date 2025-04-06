@@ -90,10 +90,6 @@ public class PlayerMovement : MonoBehaviour
             CurrentDashes--;
             dashing = true;
             currentDashTime = dashTime;
-            if (REMOVETHISLATER)
-                tempDashVelocitySave = rb.velocity.y;
-            else
-                tempDashVelocitySave = 0;
         }
 
         DeathCheck();
@@ -146,8 +142,6 @@ public class PlayerMovement : MonoBehaviour
         else return "Idle Fall";
     }
 
-    float tempDashVelocitySave = 0f;
-    public bool REMOVETHISLATER = true;
     void FixedUpdate()
     {
         //Handle Horizontal Movement
@@ -175,7 +169,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 StopDashEffect();
                 dashing = false;
-                targetYVelocity = tempDashVelocitySave;
             }
         }
         else
