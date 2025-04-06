@@ -84,7 +84,8 @@ public class PlayerMovement : MonoBehaviour
         if (dashing) return;
 
         if (inputHorizontal <= -0.1f) dashDirectionX = -1;
-        else dashDirectionX = 1;
+        else if (inputHorizontal >= 0.1f) dashDirectionX = 1;
+        else dashDirectionX = 0;
 
         if (inputVertical <= -0.1f) dashDirectionY = -1;
         // else if (inputVertical >= 0.1f) dashDirectionY = 1;
@@ -333,7 +334,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem dash;
     void StartDashEffect()
     {
-        dash.transform.localScale = new Vector3(dashDirectionX, 1, 1);
+        int scale = dashDirectionX != 0 ? dashDirectionX : 1;
+        dash.transform.localScale = new Vector3(scale, 1, 1);
         dash.Play();
     }
 
