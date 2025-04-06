@@ -79,6 +79,7 @@ public class EnemyAnimations : MonoBehaviour
     }
 
     public bool isFlipped() {
+        if (ratRend == null) return false;
         Vector3 scale = ratRend.transform.parent.localScale;
         return scale.x == -1;
     }
