@@ -24,12 +24,10 @@ public class GroundMove : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collide) return;
-        print(collision.tag);
         if (collision.tag == "World" || collision.tag == "Edge") {
             StartCollideCooldown();
             anim.FlipX(2);
             moveSpeed = -moveSpeed;
-            print(transform.position.y + " " + moveSpeed);
         }
     }
 

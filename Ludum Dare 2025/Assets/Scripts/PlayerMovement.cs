@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private EffectData stompEffect;
     [SerializeField] private EffectData stompDamager;
     [SerializeField] private ParticleSystem descentEffect;
+    [SerializeField] private CameraShakeData camShakeDataOnSlam;
 
     [SerializeField] private AudioSource flingSFX, slamSFX, landSFX, hitSFX, dashSFX, diveSFX, diveLoopSFX, killSFX;
     // Start is called before the first frame update
@@ -62,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
         Time.timeScale = 1;
         InitDescentEffect();
         StopDescentEffect();
+        baseThreshold = attackSpeedThreshold;
     }
 
     float inputHorizontal = 0;
@@ -71,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     bool damaging = false;
     [SerializeField] bool floored = false;
     float damagedDirection = 0f;
+    float baseThreshold;
 
     // Update is called once per frame
     void Update()
@@ -155,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Handle Horizontal Movement
         float targetAcceleration = XAcceleration;
-
+        attackSpeedThreshold = GameManager.instance.cam.TargetSpeed + baseThreshold;
 
         float targetXVelocity = inputHorizontal * XSpeed;
 
@@ -232,7 +235,7 @@ public class PlayerMovement : MonoBehaviour
     public void AddDash()
     {
         killSFX.Play();
-        
+
         if (CurrentDashes >= MaxDashes) return;
         CurrentDashes++;
     }
@@ -264,6 +267,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, 1 << 0);
         effectHandler.CreateEffect(stompEffect, hit.point, Quaternion.identity);
         effectHandler.CreateEffect(stompDamager, hit.point, Quaternion.identity);
+        Camera.main.transform.parent.GetComponent<CameraShake>().ShakeCamera(camShakeDataOnSlam, Vector2.down);
         slamSFX.Play();
     }
 
