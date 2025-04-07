@@ -17,9 +17,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float attackSpeedThreshold = 10;
 
     [Header("Vertical Movement")]
-    [SerializeField] private float YSpeedCap = 3.7f;
-    [SerializeField] private float YFallSpeedCap = 7f;
-    [SerializeField] private float YFloatSpeedCap = 2.6f;
+    //[SerializeField] private float YSpeedCap = 3.7f;
+    [SerializeField] private float YFallSpeedCap = 3.3f;
+    [SerializeField] private float YFloatSpeedCap = -1.1f;
     [SerializeField] private float Gravity = -9.8f;
     [SerializeField] private float YAcceleration = 50f;
     [Header("Damage")]
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     float inputHorizontal = 0;
     float inputVertical = 0;
-    bool dashing = false;
+    public bool Dashing { get; private set; } = false;
     bool damaged = false;
     bool damaging = false;
     [SerializeField] bool floored = false;
@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
         Animate();
 
-        if (dashing) return;
+        if (Dashing) return;
 
         if (inputHorizontal <= -0.1f) dashDirectionX = -1;
         else if (inputHorizontal >= 0.1f) dashDirectionX = 1;
@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StartDashEffect();
             CurrentDashes--;
-            dashing = true;
+            Dashing = true;
             currentDashTime = dashTime;
         }
 
@@ -126,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
                 damaging = false;
             return "Hurt";
         }
-        else if (dashing) return "Dash";
+        else if (Dashing) return "Dash";
         else if (floored)
         {
             if (Mathf.Abs(inputHorizontal) > 0.1f) return "Walk";
@@ -163,9 +163,9 @@ public class PlayerMovement : MonoBehaviour
             Time.fixedDeltaTime * XAcceleration);
 
         float velocityY = rb.velocity.y;
-        float targetYVelocity = velocityY + Gravity * Time.fixedDeltaTime;
+        float targetYVelocity = 0f;
         //Handle Dash
-        if (dashing)
+        if (Dashing)
         {
             targetXVelocity = dashSpeed * dashDirectionX;
 
@@ -174,17 +174,17 @@ public class PlayerMovement : MonoBehaviour
             if (currentDashTime < 0f)
             {
                 StopDashEffect();
-                dashing = false;
+                Dashing = false;
             }
         }
         else
         {
             //Handle Vertical Movement
+            float currentYSpeedCap = GameManager.instance.cam.TargetSpeed;
+            targetYVelocity = velocityY + Time.fixedDeltaTime * Gravity;
 
-            float currentYSpeedCap = YSpeedCap;
-
-            if (inputVertical <= -0.1f) currentYSpeedCap = YFallSpeedCap;
-            if (inputVertical >= 0.1f) currentYSpeedCap = YFloatSpeedCap;
+            if (inputVertical <= -0.1f) currentYSpeedCap = YFallSpeedCap + currentYSpeedCap;
+            if (inputVertical >= 0.1f) currentYSpeedCap = YFloatSpeedCap + currentYSpeedCap;
 
             if (-rb.velocity.y >= currentYSpeedCap)
             {
@@ -222,7 +222,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     public bool getDash() {
-        return dashing;
+        return Dashing;
     }
     public void AddDash() {
         CurrentDashes++;
@@ -261,7 +261,7 @@ public class PlayerMovement : MonoBehaviour
     void HandleEnemy(Collider2D other)
     {
         if (!other.CompareTag("Enemy")) return;
-        if (dashing)
+        if (Dashing)
         {
             // AddDash();
             return;
@@ -276,7 +276,7 @@ public class PlayerMovement : MonoBehaviour
 
     void TakeDamage(Collider2D other)
     {
-        if (dashing) return;
+        if (Dashing) return;
         if (iFramesCounter > 0) return;
 
         damaged = true;
@@ -344,5 +344,6 @@ public class PlayerMovement : MonoBehaviour
     void StopDashEffect()
     {
         dash.Stop();
+        GameManager.instance.cam.StopDash();
     }
 }

@@ -127,11 +127,6 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 1118560602962659127, guid: 98c7a045510183e4cba86fbbcbb6a71f, type: 3}
   m_PrefabInstance: {fileID: 4425067410544987299}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &519420032 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7160371338369725207, guid: 98c7a045510183e4cba86fbbcbb6a71f, type: 3}
-  m_PrefabInstance: {fileID: 4425067410544987299}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +220,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4849999078191fd4baddd416fe30d26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &980218521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7281380474606636341, guid: 98c7a045510183e4cba86fbbcbb6a71f, type: 3}
+  m_PrefabInstance: {fileID: 4425067410544987299}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fc2a2b11794c1f0be9f5047c88d572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1232336050 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7565248256408814509, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
@@ -236,11 +242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3b344d774a2c9bc88d4f7e28f259bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2034849636 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786993922541382744, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
-  m_PrefabInstance: {fileID: 1956779442472530236}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2134776552 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3897444941419759528, guid: da101a4d98baef943b5a789d355ad619, type: 3}
@@ -372,6 +373,10 @@ PrefabInstance:
       propertyPath: deathScreen
       value: 
       objectReference: {fileID: 2134776552}
+    - target: {fileID: 7565248256408814509, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+      propertyPath: YFloatSpeedCap
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 7786993922541382744, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.6082623
@@ -694,7 +699,11 @@ PrefabInstance:
     - target: {fileID: 7281380474606636341, guid: 98c7a045510183e4cba86fbbcbb6a71f, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2034849636}
+      objectReference: {fileID: 1232336050}
+    - target: {fileID: 7281380474606636341, guid: 98c7a045510183e4cba86fbbcbb6a71f, type: 3}
+      propertyPath: FollowHeight
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -755,7 +764,7 @@ PrefabInstance:
     - target: {fileID: 8326429393154816983, guid: c0253633abf1a4e41a625cd001c17ccf, type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 519420032}
+      objectReference: {fileID: 980218521}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
