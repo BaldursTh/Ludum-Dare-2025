@@ -518,6 +518,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b0af4ece5457bf40a1f05d1eafaf751, type: 3}
+--- !u!82 &742973732 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2424482803690336013, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+  m_PrefabInstance: {fileID: 1415778240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &755653128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -676,6 +681,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98c7a045510183e4cba86fbbcbb6a71f, type: 3}
+--- !u!82 &1052077976 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3600206393836898781, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+  m_PrefabInstance: {fileID: 1415778240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1169897081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -837,6 +847,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2424482803690336013, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362907701067492822, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3365113866351652758, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3564051089404969394, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -855,6 +877,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3564051089404969394, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3600206393836898781, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6177435164578773162, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
@@ -885,6 +911,26 @@ PrefabInstance:
       propertyPath: m_UseCustomVertexStreams
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6667440282531877796, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7565248256408814509, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+      propertyPath: hitSFX
+      value: 
+      objectReference: {fileID: 1575320190}
+    - target: {fileID: 7565248256408814509, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+      propertyPath: dashSFX
+      value: 
+      objectReference: {fileID: 2023331768}
+    - target: {fileID: 7565248256408814509, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+      propertyPath: landSFX
+      value: 
+      objectReference: {fileID: 742973732}
+    - target: {fileID: 7565248256408814509, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+      propertyPath: slamSFX
+      value: 
+      objectReference: {fileID: 1052077976}
     - target: {fileID: 7565248256408814509, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
       propertyPath: deathScreen
       value: 
@@ -1023,6 +1069,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82fc2a2b11794c1f0be9f5047c88d572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1575320190 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3365113866351652758, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+  m_PrefabInstance: {fileID: 1415778240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1695251496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1170,6 +1221,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
   gravityScale: 10
+--- !u!82 &2023331768 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3362907701067492822, guid: f64d3604426ab3e40a14f0db599bda18, type: 3}
+  m_PrefabInstance: {fileID: 1415778240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1561743171309489685
 MonoBehaviour:
   m_ObjectHideFlags: 0

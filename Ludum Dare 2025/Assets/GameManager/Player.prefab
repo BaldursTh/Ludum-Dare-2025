@@ -43,7 +43,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9aa4e96231bf3eeedbaa668211e87550, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -255,7 +255,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0174841d945028026a07cad340652348, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1134,7 +1134,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ca4ffa29ad7240bd2906e55554261255, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1329,7 +1329,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 80f8967f0032af890a883921b4f25092, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1457,7 +1457,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 76f08fdec5226583a87ec04b6f51d11e, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -11526,9 +11526,9 @@ MonoBehaviour:
   stompDamager: {fileID: 11400000, guid: bd61289a10444934e98fce4d138d6a32, type: 2}
   descentEffect: {fileID: 684543077337873440}
   flingSFX: {fileID: 6667440282531877796}
-  slamSFX: {fileID: 0}
-  landSFX: {fileID: 0}
-  hitSFX: {fileID: 0}
-  dashSFX: {fileID: 0}
+  slamSFX: {fileID: 3600206393836898781}
+  landSFX: {fileID: 2424482803690336013}
+  hitSFX: {fileID: 3365113866351652758}
+  dashSFX: {fileID: 3362907701067492822}
   floored: 0
   dash: {fileID: 980577235206274153}
