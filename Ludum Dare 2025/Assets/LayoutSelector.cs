@@ -39,7 +39,6 @@ public class LayoutSelector : MonoBehaviour
     void SpawnLevel(LevelDescriptor level)
     {
         Instantiate(level.scene, new Vector3(0, -depth, 0), Quaternion.identity, transform);
-        Debug.LogWarning(level.height);
         depth += level.height;
 
         createdLevelDepths[nextDeleteIndex] = depth;

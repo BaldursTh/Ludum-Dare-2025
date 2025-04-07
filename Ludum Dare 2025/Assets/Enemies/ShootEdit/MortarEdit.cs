@@ -8,7 +8,7 @@ public class MortarEdit : ShootEdit
     ShooterData data;
     GameObject player;
     EnemyAnimations anim;
-    void Start()
+    void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<EnemyAnimations>();

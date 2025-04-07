@@ -26,6 +26,11 @@ public class EnemyAnimations : MonoBehaviour
         gunRend = gunRotater.GetComponentInChildren<SpriteRenderer>();
     }
 
+    void Start()
+    {
+
+    }
+
     void Animate()
     {
 

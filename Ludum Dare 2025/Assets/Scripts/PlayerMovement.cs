@@ -80,7 +80,6 @@ public class PlayerMovement : MonoBehaviour
 
         Animate();
 
-
         if (dashing) return;
 
         if (inputHorizontal <= -0.1f) dashDirectionX = -1;
@@ -111,8 +110,8 @@ public class PlayerMovement : MonoBehaviour
         ren.flipX = inputHorizontal < 0;
 
         string targetAnimation = GetAnimation();
-        if (damaging)
-            Debug.Log(damaging.ToString() + targetAnimation);
+        // if (damaging)
+        //     Debug.Log(damaging.ToString() + targetAnimation);
 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName(targetAnimation)) animator.Play(targetAnimation);
     }
@@ -200,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
         //Handle Damage
         if (damaged)
         {
-            Debug.LogWarning(damaged);
+            //Debug.LogWarning(damaged);
             damaged = false;
             damaging = true;
             targetYVelocity = damageFlingY;
@@ -224,6 +223,9 @@ public class PlayerMovement : MonoBehaviour
     }
     public bool getDash() {
         return dashing;
+    }
+    public void AddDash() {
+        CurrentDashes++;
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -261,12 +263,12 @@ public class PlayerMovement : MonoBehaviour
         if (!other.CompareTag("Enemy")) return;
         if (dashing)
         {
-            CurrentDashes++;
+            // AddDash();
             return;
         }
         if (Attacking)
         {
-            CurrentDashes++;
+            // AddDash();
             return;
         }
         TakeDamage(other);

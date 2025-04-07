@@ -13,12 +13,22 @@ public class Shooter : Enemy
     public List<GameObject> bullets = new List<GameObject>();
     public delegate Vector2 GetVelocity(GameObject bullet);
     GetVelocity getVelocity;
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         edits = GetComponents<ShootEdit>().ToList();
         edits.ForEach(edit => edit.shooter = this);
-        ShootLoop();
+        started = false;
+    }
+    bool started = false;
+    public override void Update()
+    {
+        base.Update();
+        if (started) return;
+        if (transform.position.y + transform.lossyScale.y > Camera.main.transform.position.y - Camera.main.orthographicSize) {
+            started = true;
+            ShootLoop();
+        }
     }
     public void Shoot() {
         bullets = new List<GameObject>();

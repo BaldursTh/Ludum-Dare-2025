@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6107363110745184922}
   - component: {fileID: 4514405707531922668}
   - component: {fileID: 4666955388700362747}
+  - component: {fileID: 4777149821084406589}
   - component: {fileID: 261196545908748428}
   - component: {fileID: 363932379587122839}
   - component: {fileID: 6001229802705591040}
@@ -75,6 +76,33 @@ MonoBehaviour:
   shootPlace: {fileID: 4232272272589304582}
   edits: []
   bullets: []
+--- !u!50 &4777149821084406589
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758539057679497611}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!61 &261196545908748428
 BoxCollider2D:
   m_ObjectHideFlags: 0
