@@ -114,7 +114,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 18
+        y: 34
         width: 16
         height: 9
       alignment: 9
@@ -135,7 +135,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 18
+        y: 34
         width: 16
         height: 9
       alignment: 9
@@ -156,7 +156,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 18
+        y: 34
         width: 16
         height: 9
       alignment: 9
@@ -177,7 +177,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 18
+        y: 34
         width: 16
         height: 9
       alignment: 9
@@ -198,7 +198,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 2
+        y: 18
         width: 10
         height: 7
       alignment: 9
@@ -210,6 +210,90 @@ TextureImporter:
       bones: []
       spriteID: 2ded671c08e4917258ca7a16854d91c4
       internalID: -734901085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gun_5
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 18
+        width: 14
+        height: 8
+      alignment: 9
+      pivot: {x: 0.21428573, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7034e2a4ee31970969fee944e2444b85
+      internalID: -1641607723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gun_6
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 18
+        width: 14
+        height: 8
+      alignment: 9
+      pivot: {x: 0.21428573, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4420ab06edb84083795315b87e58e317
+      internalID: -1219206698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gun_7
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 18
+        width: 14
+        height: 8
+      alignment: 9
+      pivot: {x: 0.21428573, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a10621c728306dd1935f9fd834eb0a5
+      internalID: -1670173076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gun_8
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 14
+        height: 8
+      alignment: 9
+      pivot: {x: 0.21428573, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee5f1dba3b14ca77c879a82514395a75
+      internalID: 429020488
       vertices: []
       indices: 
       edges: []
@@ -230,6 +314,10 @@ TextureImporter:
       Gun_2: -2086596968
       Gun_3: -2096478244
       Gun_4: -734901085
+      Gun_5: -1641607723
+      Gun_6: -1219206698
+      Gun_7: -1670173076
+      Gun_8: 429020488
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
