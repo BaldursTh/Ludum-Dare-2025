@@ -309,10 +309,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 399917690309681995, guid: 5b0af4ece5457bf40a1f05d1eafaf751, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 62a7569192f0f8fa7a1dea73a2d8ffa5, type: 2}
     - target: {fileID: 6479123806383821880, guid: 5b0af4ece5457bf40a1f05d1eafaf751, type: 3}
       propertyPath: m_Name
       value: Walls
@@ -357,18 +353,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7870703708775055221, guid: 5b0af4ece5457bf40a1f05d1eafaf751, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 62a7569192f0f8fa7a1dea73a2d8ffa5, type: 2}
-    - target: {fileID: 8495489121687811797, guid: 5b0af4ece5457bf40a1f05d1eafaf751, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 62a7569192f0f8fa7a1dea73a2d8ffa5, type: 2}
-    - target: {fileID: 8820882248432053447, guid: 5b0af4ece5457bf40a1f05d1eafaf751, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 62a7569192f0f8fa7a1dea73a2d8ffa5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -467,6 +451,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1118560602962659127, guid: 98c7a045510183e4cba86fbbcbb6a71f, type: 3}
+      propertyPath: orthographic size
+      value: 16.875
+      objectReference: {fileID: 0}
     - target: {fileID: 3333882975706560951, guid: 98c7a045510183e4cba86fbbcbb6a71f, type: 3}
       propertyPath: m_Name
       value: Main Camera
