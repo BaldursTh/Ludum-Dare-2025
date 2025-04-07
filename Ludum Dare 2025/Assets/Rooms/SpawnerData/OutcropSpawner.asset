@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed5e72576107d4a48a0014b05f3e8121, type: 3}
+  m_Name: OutcropSpawner
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 4584602738478093413, guid: 22fc8755f6048e848b7f657e7695cb39, type: 3}
+  - {fileID: 9187756015942741292, guid: 58c5cc089f4cf664caead394e38d97f3, type: 3}
+  noneChance: 0

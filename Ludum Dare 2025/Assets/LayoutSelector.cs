@@ -23,7 +23,7 @@ public class LayoutSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (-GameManager.instance.Distance <= createdLevelDepths[nextDeleteIndex]) return;
+        if (-GameManager.instance.Distance <= createdLevelDepths[nextDeleteIndex]+GameManager.instance.mainCamera.orthographicSize) return;
 
         Destroy(transform.GetChild(0).gameObject);
 
@@ -39,7 +39,6 @@ public class LayoutSelector : MonoBehaviour
     void SpawnLevel(LevelDescriptor level)
     {
         Instantiate(level.scene, new Vector3(0, -depth, 0), Quaternion.identity, transform);
-        Debug.LogWarning(level.height);
         depth += level.height;
 
         createdLevelDepths[nextDeleteIndex] = depth;

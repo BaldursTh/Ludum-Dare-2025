@@ -17,9 +17,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float attackSpeedThreshold = 10;
 
     [Header("Vertical Movement")]
-    [SerializeField] private float YSpeedCap = 3.7f;
-    [SerializeField] private float YFallSpeedCap = 7f;
-    [SerializeField] private float YFloatSpeedCap = 2.6f;
+    //[SerializeField] private float YSpeedCap = 3.7f;
+    [SerializeField] private float YFallSpeedCap = 3.3f;
+    [SerializeField] private float YFloatSpeedCap = -1.1f;
     [SerializeField] private float Gravity = -9.8f;
     [SerializeField] private float YAcceleration = 50f;
     [Header("Damage")]
@@ -33,7 +33,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashSpeed = 10f;
     [SerializeField] private float dashTime = 0.3f;
     [SerializeField] private float currentDashTime = 0.3f;
-    private int dashDirection = 1;
+    private int dashDirectionX = 1;
+    private int dashDirectionY = -1;
     public int CurrentDashes { get; private set; } = 3;
 
 
@@ -43,8 +44,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject deathScreen;
     private EffectHandler effectHandler;
     [SerializeField] private EffectData deathEffect;
-    [SerializeField] private EffectData dashEffect;
     [SerializeField] private EffectData stompEffect;
+    [SerializeField] private EffectData stompDamager;
     [SerializeField] private ParticleSystem descentEffect;
     // Start is called before the first frame update
     void Start()
@@ -63,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     float inputHorizontal = 0;
     float inputVertical = 0;
-    bool dashing = false;
+    public bool Dashing { get; private set; } = false;
     bool damaged = false;
     bool damaging = false;
     [SerializeField] bool floored = false;
@@ -79,16 +80,21 @@ public class PlayerMovement : MonoBehaviour
 
         Animate();
 
+        if (Dashing) return;
 
-        if (dashing) return;
-        if (inputHorizontal <= -0.1f) dashDirection = -1;
-        if (inputHorizontal >= 0.1f) dashDirection = 1;
+        if (inputHorizontal <= -0.1f) dashDirectionX = -1;
+        else if (inputHorizontal >= 0.1f) dashDirectionX = 1;
+        else dashDirectionX = 0;
+
+        if (inputVertical <= -0.1f) dashDirectionY = -1;
+        // else if (inputVertical >= 0.1f) dashDirectionY = 1;
+        else dashDirectionY = 0;
 
         if (Input.GetButtonDown("Jump") && CurrentDashes > 0)
         {
             StartDashEffect();
             CurrentDashes--;
-            dashing = true;
+            Dashing = true;
             currentDashTime = dashTime;
         }
 
@@ -104,8 +110,8 @@ public class PlayerMovement : MonoBehaviour
         ren.flipX = inputHorizontal < 0;
 
         string targetAnimation = GetAnimation();
-        if (damaging)
-            Debug.Log(damaging.ToString() + targetAnimation);
+        // if (damaging)
+        //     Debug.Log(damaging.ToString() + targetAnimation);
 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName(targetAnimation)) animator.Play(targetAnimation);
     }
@@ -120,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
                 damaging = false;
             return "Hurt";
         }
-        else if (dashing) return "Dash";
+        else if (Dashing) return "Dash";
         else if (floored)
         {
             if (Mathf.Abs(inputHorizontal) > 0.1f) return "Walk";
@@ -157,28 +163,28 @@ public class PlayerMovement : MonoBehaviour
             Time.fixedDeltaTime * XAcceleration);
 
         float velocityY = rb.velocity.y;
-        float targetYVelocity = velocityY + Gravity * Time.fixedDeltaTime;
+        float targetYVelocity = 0f;
         //Handle Dash
-        if (dashing)
+        if (Dashing)
         {
-            targetXVelocity = dashSpeed * dashDirection;
+            targetXVelocity = dashSpeed * dashDirectionX;
 
             currentDashTime -= Time.fixedDeltaTime;
-            targetYVelocity = 0;
+            targetYVelocity = dashDirectionY * dashSpeed;
             if (currentDashTime < 0f)
             {
                 StopDashEffect();
-                dashing = false;
+                Dashing = false;
             }
         }
         else
         {
             //Handle Vertical Movement
+            float currentYSpeedCap = GameManager.instance.cam.TargetSpeed;
+            targetYVelocity = velocityY + Time.fixedDeltaTime * Gravity;
 
-            float currentYSpeedCap = YSpeedCap;
-
-            if (inputVertical <= -0.1f) currentYSpeedCap = YFallSpeedCap;
-            if (inputVertical >= 0.1f) currentYSpeedCap = YFloatSpeedCap;
+            if (inputVertical <= -0.1f) currentYSpeedCap = YFallSpeedCap + currentYSpeedCap;
+            if (inputVertical >= 0.1f) currentYSpeedCap = YFloatSpeedCap + currentYSpeedCap;
 
             if (-rb.velocity.y >= currentYSpeedCap)
             {
@@ -193,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
         //Handle Damage
         if (damaged)
         {
-            Debug.LogWarning(damaged);
+            //Debug.LogWarning(damaged);
             damaged = false;
             damaging = true;
             targetYVelocity = damageFlingY;
@@ -215,7 +221,12 @@ public class PlayerMovement : MonoBehaviour
             rotatePoint.transform.eulerAngles = new Vector3(0, 0, targetAngle);
         }
     }
-
+    public bool getDash() {
+        return Dashing;
+    }
+    public void AddDash() {
+        CurrentDashes++;
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         HandleDamager(other);
@@ -238,6 +249,7 @@ public class PlayerMovement : MonoBehaviour
         if (!Attacking) return;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, 1 << 0);
         effectHandler.CreateEffect(stompEffect, hit.point, Quaternion.identity);
+        effectHandler.CreateEffect(stompDamager, hit.point, Quaternion.identity);
     }
 
     void HandleDamager(Collider2D other)
@@ -249,14 +261,14 @@ public class PlayerMovement : MonoBehaviour
     void HandleEnemy(Collider2D other)
     {
         if (!other.CompareTag("Enemy")) return;
-        if (dashing)
+        if (Dashing)
         {
-            CurrentDashes++;
+            // AddDash();
             return;
         }
         if (Attacking)
         {
-            CurrentDashes++;
+            // AddDash();
             return;
         }
         TakeDamage(other);
@@ -264,7 +276,7 @@ public class PlayerMovement : MonoBehaviour
 
     void TakeDamage(Collider2D other)
     {
-        if (dashing) return;
+        if (Dashing) return;
         if (iFramesCounter > 0) return;
 
         damaged = true;
@@ -324,12 +336,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem dash;
     void StartDashEffect()
     {
-        dash.transform.localScale = new Vector3(dashDirection, 1, 1);
+        int scale = dashDirectionX != 0 ? dashDirectionX : 1;
+        dash.transform.localScale = new Vector3(scale, 1, 1);
         dash.Play();
     }
 
     void StopDashEffect()
     {
         dash.Stop();
+        GameManager.instance.cam.StopDash();
     }
 }

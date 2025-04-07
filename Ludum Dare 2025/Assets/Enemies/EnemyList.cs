@@ -6,8 +6,10 @@ using UnityEngine;
 public class EnemyList : ScriptableObject
 {
     public List<GameObject> enemies;
-
+    [Range(0, 1)]
+    public float noneChance = 0;
     public GameObject getRandomEnemy() {
+        if (Random.Range(0f, 1f) < noneChance) return new GameObject();
         return enemies[Random.Range(0, enemies.Count)];
     }
 }

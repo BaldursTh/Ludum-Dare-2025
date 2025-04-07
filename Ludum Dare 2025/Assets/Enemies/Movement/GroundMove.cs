@@ -8,9 +8,11 @@ public class GroundMove : MonoBehaviour
     float moveSpeed;
     public float baseSpeed;
     Rigidbody2D rb;
+    EnemyAnimations anim;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<EnemyAnimations>();
         moveSpeed = baseSpeed;
     }
     void Update()
@@ -20,8 +22,7 @@ public class GroundMove : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "World" || collision.tag == "Edge") {
-            SpriteRenderer rend = GetComponent<SpriteRenderer>();
-            rend.flipX = !rend.flipX;
+            anim.FlipX(2);
             moveSpeed = -moveSpeed;
         }
     }

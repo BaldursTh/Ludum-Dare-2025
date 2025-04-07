@@ -7,10 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameData data;
-    [SerializeField] private Transform cam;
+    public Camera mainCamera;
+    [SerializeField] public CameraMovement cam;
 
-    public int Score { get { return (int)Mathf.Floor(-cam.position.y); } }
-    public float Distance { get => cam.position.y; }
+    public int Score { get { return (int)Mathf.Floor(-cam.transform.position.y); } }
+    public float Distance { get => cam.transform.position.y; }
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        mainCamera = cam.GetComponentInChildren<Camera>();
     }
 
     private void OnDestroy()

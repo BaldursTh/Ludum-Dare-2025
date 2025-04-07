@@ -10,6 +10,8 @@ TagManager:
   - Edge
   - Mover
   - DeathScreen
+  - PlayerDamager
+  - GunPivot
   layers:
   - Default
   - TransparentFX

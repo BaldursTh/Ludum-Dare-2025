@@ -56,4 +56,13 @@ public static class Extension
         if (adder >= bound) adder = 0;
         return adder;
     }
+
+    public static GameObject GetChildWithTag(this GameObject parent, string tag) {
+
+        for (int i = 0; i< parent.transform.childCount; i++)
+        {
+            if (parent.transform.GetChild(i).CompareTag(tag)) return parent.transform.GetChild(i).gameObject;
+        }
+        return null;
+    }
 }
