@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1529639366, guid: 60861a7d6894a164fbe651153e7072af, type: 3}
+  m_Sprite: {fileID: -669895716, guid: f1f40263e44aa6749bdab63cc401454c, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 2832371674913153376}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1433333, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -265,6 +265,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 2fb832e43c4e1ed44aace194b05d71ad, type: 2}
   effectHandler: {fileID: 0}
   hitbox: {fileID: 0}
+  player: {fileID: 0}
 --- !u!50 &4788778790137642883
 Rigidbody2D:
   serializedVersion: 4
