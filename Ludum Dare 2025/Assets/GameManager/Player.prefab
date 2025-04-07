@@ -10831,7 +10831,6 @@ MonoBehaviour:
   XSpeed: 10
   XAcceleration: 6
   attackSpeedThreshold: 11
-  YSpeedCap: 10
   YFallSpeedCap: 100
   YFloatSpeedCap: 5
   Gravity: -9.8

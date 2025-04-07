@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: BasicPlatformSpawner
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 8157847477725677729, guid: 805b5dd9de9f23842b973b11daa1480c, type: 3}
+  - {fileID: 7726225829591251929, guid: 26d87a069ac147441947854dd252c38f, type: 3}
+  - {fileID: 4584602738478093413, guid: 22fc8755f6048e848b7f657e7695cb39, type: 3}
+  - {fileID: 4584602738478093413, guid: 22fc8755f6048e848b7f657e7695cb39, type: 3}
   noneChance: 0
