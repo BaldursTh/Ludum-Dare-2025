@@ -118,7 +118,7 @@ TextureImporter:
         width: 13
         height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,7 +139,7 @@ TextureImporter:
         width: 13
         height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_2
+      name: Rat_Shoot1
       rect:
         serializedVersion: 2
         x: 34
@@ -160,7 +160,7 @@ TextureImporter:
         width: 13
         height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_3
+      name: Rat_Shoot2
       rect:
         serializedVersion: 2
         x: 50
@@ -181,7 +181,7 @@ TextureImporter:
         width: 13
         height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,7 +194,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_4
+      name: Rat_Diag
       rect:
         serializedVersion: 2
         x: 2
@@ -202,7 +202,7 @@ TextureImporter:
         width: 13
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,7 +215,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_5
+      name: Rat_Diag2
       rect:
         serializedVersion: 2
         x: 18
@@ -223,7 +223,7 @@ TextureImporter:
         width: 13
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,7 +236,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_6
+      name: Rat_DiagShoot1
       rect:
         serializedVersion: 2
         x: 34
@@ -244,7 +244,7 @@ TextureImporter:
         width: 12
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -257,7 +257,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_7
+      name: Rat_DiagShoot2
       rect:
         serializedVersion: 2
         x: 50
@@ -265,7 +265,7 @@ TextureImporter:
         width: 12
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -278,7 +278,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_8
+      name: Rat_Up
       rect:
         serializedVersion: 2
         x: 4
@@ -286,7 +286,7 @@ TextureImporter:
         width: 8
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -299,7 +299,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_9
+      name: Rat_Up2
       rect:
         serializedVersion: 2
         x: 20
@@ -307,7 +307,7 @@ TextureImporter:
         width: 8
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -320,7 +320,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_10
+      name: Rat_UpShoot1
       rect:
         serializedVersion: 2
         x: 36
@@ -328,7 +328,7 @@ TextureImporter:
         width: 8
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -341,7 +341,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_11
+      name: Rat_UpShoot2
       rect:
         serializedVersion: 2
         x: 52
@@ -349,7 +349,7 @@ TextureImporter:
         width: 8
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -362,7 +362,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_12
+      name: Rat_Walk1
       rect:
         serializedVersion: 2
         x: 2
@@ -370,7 +370,7 @@ TextureImporter:
         width: 13
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -383,7 +383,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_13
+      name: Rat_Walk2
       rect:
         serializedVersion: 2
         x: 18
@@ -391,7 +391,7 @@ TextureImporter:
         width: 13
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -404,7 +404,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_14
+      name: Rat_Walk3
       rect:
         serializedVersion: 2
         x: 34
@@ -412,7 +412,7 @@ TextureImporter:
         width: 13
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -425,7 +425,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_15
+      name: Rat_Walk4
       rect:
         serializedVersion: 2
         x: 50
@@ -433,7 +433,7 @@ TextureImporter:
         width: 13
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -458,20 +458,20 @@ TextureImporter:
     nameFileIdTable:
       Rat_0: -669895716
       Rat_1: 1209853177
-      Rat_10: -1053675345
-      Rat_11: 781031646
-      Rat_12: -874245684
-      Rat_13: -1071758368
-      Rat_14: 1081503059
-      Rat_15: 320934879
-      Rat_2: -1382360915
-      Rat_3: -411501320
-      Rat_4: 562404564
-      Rat_5: 1389681276
-      Rat_6: 744537170
-      Rat_7: -847431002
-      Rat_8: -785891825
-      Rat_9: 2135597935
+      Rat_Diag: 562404564
+      Rat_Diag2: 1389681276
+      Rat_DiagShoot1: 744537170
+      Rat_DiagShoot2: -847431002
+      Rat_Shoot1: -1382360915
+      Rat_Shoot2: -411501320
+      Rat_Up: -785891825
+      Rat_Up2: 2135597935
+      Rat_UpShoot1: -1053675345
+      Rat_UpShoot2: 781031646
+      Rat_Walk1: -874245684
+      Rat_Walk2: -1071758368
+      Rat_Walk3: 1081503059
+      Rat_Walk4: 320934879
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
