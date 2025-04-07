@@ -229,6 +229,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void AddDash() {
         killSFX.Play();
+        
+        if (CurrentDashes >= MaxDashes) return;
         CurrentDashes++;
     }
     void OnTriggerEnter2D(Collider2D other)

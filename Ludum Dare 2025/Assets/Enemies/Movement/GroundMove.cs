@@ -9,11 +9,13 @@ public class GroundMove : MonoBehaviour
     public float baseSpeed;
     Rigidbody2D rb;
     EnemyAnimations anim;
+    bool collide = true;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<EnemyAnimations>();
         moveSpeed = baseSpeed;
+        cooldown = CollideCooldown();
     }
     void Update()
     {
@@ -21,9 +23,25 @@ public class GroundMove : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!collide) return;
+        print(collision.tag);
         if (collision.tag == "World" || collision.tag == "Edge") {
+            StartCollideCooldown();
             anim.FlipX(2);
             moveSpeed = -moveSpeed;
+            print(transform.position.y + " " + moveSpeed);
         }
+    }
+
+    void StartCollideCooldown() {
+        StopCoroutine(cooldown);
+        cooldown = CollideCooldown();
+        StartCoroutine(cooldown);
+    }
+    IEnumerator cooldown;
+    IEnumerator CollideCooldown() {
+        collide = false;
+        yield return new WaitForSeconds (1f);
+        collide = true;
     }
 }

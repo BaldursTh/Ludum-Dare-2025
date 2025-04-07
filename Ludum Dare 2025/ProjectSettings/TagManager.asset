@@ -12,6 +12,7 @@ TagManager:
   - DeathScreen
   - PlayerDamager
   - GunPivot
+  - RenderTile
   layers:
   - Default
   - TransparentFX
