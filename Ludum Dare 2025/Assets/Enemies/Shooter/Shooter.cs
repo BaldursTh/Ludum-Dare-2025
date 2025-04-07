@@ -42,6 +42,7 @@ public class Shooter : Enemy
             rb.velocity = getVelocity(bullet);
         });
         GetComponent<EnemyAnimations>().AnimatorShoot();
+        GetComponentInChildren<AudioSource>().Play();
     }
 
     public void ShootLoop() {
