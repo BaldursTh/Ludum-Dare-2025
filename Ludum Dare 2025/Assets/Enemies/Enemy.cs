@@ -26,4 +26,9 @@ public class Enemy : MonoBehaviour
             OnDeath();
         }
     }
+
+    void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
 }

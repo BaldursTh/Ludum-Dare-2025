@@ -8,7 +8,7 @@ public class ForceOnShot : ShootEdit
     public override void doEdit(GameObject bullet)
     {
         Vector2 direction = -Vector2.right;
-        if (GetComponent<SpriteRenderer>().flipX) direction *= -1;
+        if (GetComponent<EnemyAnimations>().isFlipped()) direction *= -1;
         GetComponent<Rigidbody2D>().AddForce(shotForce * direction.normalized);
     }
 }

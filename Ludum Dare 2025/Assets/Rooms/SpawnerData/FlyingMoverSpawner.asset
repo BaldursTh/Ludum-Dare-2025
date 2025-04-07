@@ -10,13 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed5e72576107d4a48a0014b05f3e8121, type: 3}
-  m_Name: BasicPlatformSpawner
+  m_Name: FlyingMoverSpawner
   m_EditorClassIdentifier: 
   enemies:
   - {fileID: 4584602738478093413, guid: 22fc8755f6048e848b7f657e7695cb39, type: 3}
-  - {fileID: 7726225829591251929, guid: 26d87a069ac147441947854dd252c38f, type: 3}
-  - {fileID: 811882984009260346, guid: 8e2250ca205522f4c81ade094c7bfc7a, type: 3}
-  - {fileID: 6471137007333740090, guid: 4f920d51e6420344aab3f730a2154e3c, type: 3}
-  - {fileID: 9187756015942741292, guid: 58c5cc089f4cf664caead394e38d97f3, type: 3}
-  - {fileID: 8157847477725677729, guid: 805b5dd9de9f23842b973b11daa1480c, type: 3}
   noneChance: 0

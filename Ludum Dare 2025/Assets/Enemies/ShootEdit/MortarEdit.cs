@@ -5,13 +5,14 @@ using UnityEngine;
 public class MortarEdit : ShootEdit
 {
     public float gravityScale;
-    public ShooterData data;
+    ShooterData data;
     GameObject player;
     EnemyAnimations anim;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<EnemyAnimations>();
+        data = shooter.data;
     }
     public override void doEdit(GameObject bullet)
     {
