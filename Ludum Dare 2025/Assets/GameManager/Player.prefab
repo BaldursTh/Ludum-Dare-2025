@@ -154,7 +154,7 @@ Transform:
   m_GameObject: {fileID: 115907449221978487}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.12, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -200,7 +200,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1273337772, guid: 48be6b8cc12af165687e7cde5c4261b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6783,7 +6783,7 @@ Transform:
   m_GameObject: {fileID: 7736079947020989446}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -1.05, z: 0}
+  m_LocalPosition: {x: 0, y: -0.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7043,7 +7043,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.1
+      scalar: 0.3
       minScalar: 0.2
       maxCurve:
         serializedVersion: 2
@@ -11746,7 +11746,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -11768,7 +11768,7 @@ MonoBehaviour:
   XAcceleration: 6
   attackSpeedThreshold: 11
   YFallSpeedCap: 100
-  YFloatSpeedCap: 5
+  YFloatSpeedCap: -1
   Gravity: -9.8
   YAcceleration: 5
   damageFlingY: 5
@@ -11784,6 +11784,7 @@ MonoBehaviour:
   stompEffect: {fileID: 11400000, guid: aa8f8c0009a9e23419b55daf2689c0b4, type: 2}
   stompDamager: {fileID: 11400000, guid: bd61289a10444934e98fce4d138d6a32, type: 2}
   descentEffect: {fileID: 684543077337873440}
+  camShakeDataOnSlam: {fileID: 11400000, guid: 92e4fc7812223e84f8391c97b2a26ee1, type: 2}
   flingSFX: {fileID: 6667440282531877796}
   slamSFX: {fileID: 3600206393836898781}
   landSFX: {fileID: 2424482803690336013}

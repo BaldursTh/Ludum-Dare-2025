@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private SpriteRenderer ren;
     public GameObject rotatePoint;
-    [SerializeField] private GameObject deathScreen;
+    [SerializeField] private FadeUI deathScreen;
     private EffectHandler effectHandler;
     [SerializeField] private EffectData deathEffect;
     [SerializeField] private EffectData stompEffect;
@@ -57,8 +57,6 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         ren = GetComponentInChildren<SpriteRenderer>();
         effectHandler = gameObject.AddComponent<EffectHandler>();
-        if (deathScreen == null) deathScreen = GameObject.FindGameObjectWithTag("DeathScreen");
-        deathScreen.SetActive(false);
         CurrentDashes = MaxDashes;
         Time.timeScale = 1;
         InitDescentEffect();
@@ -352,7 +350,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Death()
     {
-        deathScreen.SetActive(true);
+        if(deathScreen == null) deathScreen= GameObject.FindGameObjectWithTag("DeathScreen").GetComponent<FadeUI>(); 
+        deathScreen.EndGame();
+        killSFX.transform.parent = null;
+        killSFX.Play();
         gameObject.SetActive(false);
         Camera.main.GetComponent<CameraMovement>().enabled = false;
         effectHandler.CreateEffect(deathEffect, transform.position, Quaternion.identity);

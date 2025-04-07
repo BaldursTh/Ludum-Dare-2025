@@ -7,7 +7,7 @@ public class SceneManagement : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("TheDescent");
     }
 
     public void GoToTitle() {
