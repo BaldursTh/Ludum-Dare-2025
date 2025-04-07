@@ -221,13 +221,16 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            rotatePoint.transform.eulerAngles = new Vector3(0, 0, targetAngle);
+            if (float.IsFinite(targetAngle))
+                rotatePoint.transform.eulerAngles = new Vector3(0, 0, targetAngle);
         }
     }
-    public bool getDash() {
+    public bool getDash()
+    {
         return Dashing;
     }
-    public void AddDash() {
+    public void AddDash()
+    {
         killSFX.Play();
         
         if (CurrentDashes >= MaxDashes) return;
@@ -252,10 +255,12 @@ public class PlayerMovement : MonoBehaviour
 
         floored = true;
 
-        if (!Attacking) {
+        if (!Attacking)
+        {
             landSFX.Play();
             return;
-        };
+        }
+        ;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, 1 << 0);
         effectHandler.CreateEffect(stompEffect, hit.point, Quaternion.identity);
         effectHandler.CreateEffect(stompDamager, hit.point, Quaternion.identity);
@@ -306,8 +311,8 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(rb.velocity.y) >= attackSpeedThreshold)
         {
             Attacking = true;
-            if(!diveSFX.isPlaying && !diveLoopSFX.isPlaying) diveSFX.Play();
-            if(diveSFX.isPlaying && diveSFX.time > diveSFX.clip.length-0.1f) diveLoopSFX.Play();
+            if (!diveSFX.isPlaying && !diveLoopSFX.isPlaying) diveSFX.Play();
+            if (diveSFX.isPlaying && diveSFX.time > diveSFX.clip.length - 0.1f) diveLoopSFX.Play();
             return;
         }
         Attacking = false;
