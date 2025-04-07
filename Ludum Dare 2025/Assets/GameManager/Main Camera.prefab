@@ -151,8 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82fc2a2b11794c1f0be9f5047c88d572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Acceleration: 0.01
-  StartingSpeed: 3
+  Acceleration: 3
+  StartingSpeed: 5
+  DistanceMultiplier: 0.05
   FollowHeight: 2
   player: {fileID: 0}
 --- !u!114 &5886155667777577164

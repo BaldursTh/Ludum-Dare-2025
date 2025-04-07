@@ -8,7 +8,7 @@ public class Damager : MonoBehaviour
     EffectHandler effectHandler;
     public EffectData destroyEffect;
     bool destroyOnWorldCollision = true;
-    void Start()
+    void Awake()
     {
         effectHandler = gameObject.AddComponent<EffectHandler>();
         if (GetComponent<Rebound>() != null) destroyOnWorldCollision = false;
