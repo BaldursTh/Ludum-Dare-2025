@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private EffectData stompDamager;
     [SerializeField] private ParticleSystem descentEffect;
 
-    [SerializeField] private AudioSource flingSFX, slamSFX, landSFX, hitSFX, dashSFX;
+    [SerializeField] private AudioSource flingSFX, slamSFX, landSFX, hitSFX, dashSFX, diveSFX, diveLoopSFX, killSFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -228,6 +228,7 @@ public class PlayerMovement : MonoBehaviour
         return Dashing;
     }
     public void AddDash() {
+        killSFX.Play();
         CurrentDashes++;
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -303,9 +304,13 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(rb.velocity.y) >= attackSpeedThreshold)
         {
             Attacking = true;
+            if(!diveSFX.isPlaying && !diveLoopSFX.isPlaying) diveSFX.Play();
+            if(diveSFX.isPlaying && diveSFX.time > diveSFX.clip.length-0.1f) diveLoopSFX.Play();
             return;
         }
         Attacking = false;
+        diveSFX.Stop();
+        diveLoopSFX.Stop();
 
     }
     float defaultRate;
