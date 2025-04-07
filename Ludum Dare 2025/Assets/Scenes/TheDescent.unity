@@ -308,6 +308,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 702181959}
+    - target: {fileID: 7281380474606636341, guid: 98c7a045510183e4cba86fbbcbb6a71f, type: 3}
+      propertyPath: DistanceMultiplier
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -582,7 +586,11 @@ PrefabInstance:
     - target: {fileID: 8326429393154816983, guid: c0253633abf1a4e41a625cd001c17ccf, type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 1569747574}
+      objectReference: {fileID: 1498159991}
+    - target: {fileID: 8326429393154816983, guid: c0253633abf1a4e41a625cd001c17ccf, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1498159988}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -593,7 +601,7 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 1118560602962659127, guid: 98c7a045510183e4cba86fbbcbb6a71f, type: 3}
   m_PrefabInstance: {fileID: 771812628}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1569747574 stripped
+--- !u!114 &1498159991 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7281380474606636341, guid: 98c7a045510183e4cba86fbbcbb6a71f, type: 3}
   m_PrefabInstance: {fileID: 771812628}
