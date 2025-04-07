@@ -33,7 +33,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashSpeed = 10f;
     [SerializeField] private float dashTime = 0.3f;
     [SerializeField] private float currentDashTime = 0.3f;
-    private int dashDirection = 1;
+    private int dashDirectionX = 1;
+    private int dashDirectionY = -1;
     public int CurrentDashes { get; private set; } = 3;
 
 
@@ -43,8 +44,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject deathScreen;
     private EffectHandler effectHandler;
     [SerializeField] private EffectData deathEffect;
-    [SerializeField] private EffectData dashEffect;
     [SerializeField] private EffectData stompEffect;
+    [SerializeField] private EffectData stompDamager;
     [SerializeField] private ParticleSystem descentEffect;
     // Start is called before the first frame update
     void Start()
@@ -79,10 +80,15 @@ public class PlayerMovement : MonoBehaviour
 
         Animate();
 
-
         if (dashing) return;
-        if (inputHorizontal <= -0.1f) dashDirection = -1;
-        if (inputHorizontal >= 0.1f) dashDirection = 1;
+
+        if (inputHorizontal <= -0.1f) dashDirectionX = -1;
+        else if (inputHorizontal >= 0.1f) dashDirectionX = 1;
+        else dashDirectionX = 0;
+
+        if (inputVertical <= -0.1f) dashDirectionY = -1;
+        // else if (inputVertical >= 0.1f) dashDirectionY = 1;
+        else dashDirectionY = 0;
 
         if (Input.GetButtonDown("Jump") && CurrentDashes > 0)
         {
@@ -104,8 +110,8 @@ public class PlayerMovement : MonoBehaviour
         ren.flipX = inputHorizontal < 0;
 
         string targetAnimation = GetAnimation();
-        if (damaging)
-            Debug.Log(damaging.ToString() + targetAnimation);
+        // if (damaging)
+        //     Debug.Log(damaging.ToString() + targetAnimation);
 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName(targetAnimation)) animator.Play(targetAnimation);
     }
@@ -161,10 +167,10 @@ public class PlayerMovement : MonoBehaviour
         //Handle Dash
         if (dashing)
         {
-            targetXVelocity = dashSpeed * dashDirection;
+            targetXVelocity = dashSpeed * dashDirectionX;
 
             currentDashTime -= Time.fixedDeltaTime;
-            targetYVelocity = 0;
+            targetYVelocity = dashDirectionY * dashSpeed;
             if (currentDashTime < 0f)
             {
                 StopDashEffect();
@@ -193,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
         //Handle Damage
         if (damaged)
         {
-            Debug.LogWarning(damaged);
+            //Debug.LogWarning(damaged);
             damaged = false;
             damaging = true;
             targetYVelocity = damageFlingY;
@@ -215,7 +221,12 @@ public class PlayerMovement : MonoBehaviour
             rotatePoint.transform.eulerAngles = new Vector3(0, 0, targetAngle);
         }
     }
-
+    public bool getDash() {
+        return dashing;
+    }
+    public void AddDash() {
+        CurrentDashes++;
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         HandleDamager(other);
@@ -238,6 +249,7 @@ public class PlayerMovement : MonoBehaviour
         if (!Attacking) return;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, 1 << 0);
         effectHandler.CreateEffect(stompEffect, hit.point, Quaternion.identity);
+        effectHandler.CreateEffect(stompDamager, hit.point, Quaternion.identity);
     }
 
     void HandleDamager(Collider2D other)
@@ -251,12 +263,12 @@ public class PlayerMovement : MonoBehaviour
         if (!other.CompareTag("Enemy")) return;
         if (dashing)
         {
-            CurrentDashes++;
+            // AddDash();
             return;
         }
         if (Attacking)
         {
-            CurrentDashes++;
+            // AddDash();
             return;
         }
         TakeDamage(other);
@@ -324,7 +336,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem dash;
     void StartDashEffect()
     {
-        dash.transform.localScale = new Vector3(dashDirection, 1, 1);
+        int scale = dashDirectionX != 0 ? dashDirectionX : 1;
+        dash.transform.localScale = new Vector3(scale, 1, 1);
         dash.Play();
     }
 

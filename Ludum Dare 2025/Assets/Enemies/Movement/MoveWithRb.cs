@@ -13,7 +13,7 @@ public class MoveWithRb : Mover
     public override IEnumerator Movement() {
         movePointPos = movePointPos.CircleInBounds(movePoints.Count);
         Vector3 dest = movePoints[movePointPos];
-        while (mover.transform.position != dest) {
+        while ((mover.transform.position - dest).magnitude > 0.01f) {
             Vector3 newPosition = Vector3.MoveTowards(mover.transform.position, dest, speed);
             rb.MovePosition(newPosition);
             yield return null;

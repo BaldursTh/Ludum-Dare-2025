@@ -45,28 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableLevels:
-  - scene: {fileID: 7068182160955792435, guid: 311a8ecaca359c714a04acbf6f461706, type: 3}
+  - scene: {fileID: 5484475335896657921, guid: fe467939b98ec124f865a3498ed74434, type: 3}
     height: 30
-  - scene: {fileID: 7068182160955792435, guid: 311a8ecaca359c714a04acbf6f461706, type: 3}
+  - scene: {fileID: 8679631056601428004, guid: 964667e2c26adcc4fa5a84bb46bd2c29, type: 3}
+    height: 30
+  - scene: {fileID: 1222723911752725883, guid: 253904840f0df414684b58cf68632e32, type: 3}
     height: 40
-  - scene: {fileID: 7068182160955792435, guid: 311a8ecaca359c714a04acbf6f461706, type: 3}
+  - scene: {fileID: 6799021583370298251, guid: 5d1c07ab89ca8f24a924adee6a243740, type: 3}
     height: 50
-  - scene: {fileID: 7068182160955792435, guid: 311a8ecaca359c714a04acbf6f461706, type: 3}
-    height: 60
-  - scene: {fileID: 7068182160955792435, guid: 311a8ecaca359c714a04acbf6f461706, type: 3}
-    height: 60
-  - scene: {fileID: 7068182160955792435, guid: 311a8ecaca359c714a04acbf6f461706, type: 3}
-    height: 70
-  - scene: {fileID: 7068182160955792435, guid: 311a8ecaca359c714a04acbf6f461706, type: 3}
-    height: 80
-  - scene: {fileID: 7068182160955792435, guid: 311a8ecaca359c714a04acbf6f461706, type: 3}
-    height: 90
-  - scene: {fileID: 7068182160955792435, guid: 311a8ecaca359c714a04acbf6f461706, type: 3}
-    height: 60
-  - scene: {fileID: 7068182160955792435, guid: 311a8ecaca359c714a04acbf6f461706, type: 3}
-    height: 70
-  - scene: {fileID: 7068182160955792435, guid: 311a8ecaca359c714a04acbf6f461706, type: 3}
-    height: 60
   beginning:
     scene: {fileID: 7068182160955792435, guid: 311a8ecaca359c714a04acbf6f461706, type: 3}
     height: 30

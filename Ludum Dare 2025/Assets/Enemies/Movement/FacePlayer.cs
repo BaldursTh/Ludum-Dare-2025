@@ -10,7 +10,8 @@ public class FacePlayer : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player == null) return;
         Vector3 playerDir = player.transform.position - transform.position;
-        if (playerDir.x < 0) GetComponent<SpriteRenderer>().flipX = true;
-        else GetComponent<SpriteRenderer>().flipX = false;
+        EnemyAnimations anim = GetComponent<EnemyAnimations>();
+        if (playerDir.x < 0) anim.FlipX(1);
+        else anim.FlipX(0);
     }
 }
