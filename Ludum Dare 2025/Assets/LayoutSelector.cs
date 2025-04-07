@@ -23,7 +23,7 @@ public class LayoutSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (-GameManager.instance.Distance <= createdLevelDepths[nextDeleteIndex]) return;
+        if (-GameManager.instance.Distance <= createdLevelDepths[nextDeleteIndex] + Camera.main.orthographicSize) return;
 
         Destroy(transform.GetChild(0).gameObject);
 
