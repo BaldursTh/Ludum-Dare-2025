@@ -130,7 +130,11 @@ public class PlayerMovement : MonoBehaviour
                 damaging = false;
             return "Hurt";
         }
-        else if (Dashing) return "Dash";
+        else if (Dashing)
+        {
+            applyAngle = false;
+            return "Dash";
+        }
         else if (floored)
         {
             if (Mathf.Abs(inputHorizontal) > 0.1f) return "Walk";
@@ -350,7 +354,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Death()
     {
-        if(deathScreen == null) deathScreen= GameObject.FindGameObjectWithTag("DeathScreen").GetComponent<FadeUI>(); 
+        if (deathScreen == null) deathScreen = GameObject.FindGameObjectWithTag("DeathScreen").GetComponent<FadeUI>();
         deathScreen.EndGame();
         killSFX.transform.parent = null;
         killSFX.Play();
