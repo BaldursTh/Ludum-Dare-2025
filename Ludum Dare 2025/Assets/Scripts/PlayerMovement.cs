@@ -47,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private EffectData stompEffect;
     [SerializeField] private EffectData stompDamager;
     [SerializeField] private ParticleSystem descentEffect;
+
+    [SerializeField] private AudioSource flingSFX, slamSFX, landSFX, hitSFX, dashSFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -96,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
             CurrentDashes--;
             Dashing = true;
             currentDashTime = dashTime;
+            dashSFX.Play();
         }
 
         DeathCheck();
@@ -246,10 +249,14 @@ public class PlayerMovement : MonoBehaviour
 
         floored = true;
 
-        if (!Attacking) return;
+        if (!Attacking) {
+            landSFX.Play();
+            return;
+        };
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, 1 << 0);
         effectHandler.CreateEffect(stompEffect, hit.point, Quaternion.identity);
         effectHandler.CreateEffect(stompDamager, hit.point, Quaternion.identity);
+        slamSFX.Play();
     }
 
     void HandleDamager(Collider2D other)
@@ -279,6 +286,8 @@ public class PlayerMovement : MonoBehaviour
         if (Dashing) return;
         if (iFramesCounter > 0) return;
 
+        hitSFX.Play();
+        flingSFX.Play();
         damaged = true;
         damagedDirection = Mathf.Sign(transform.position.x - other.transform.position.x);
         iFramesCounter = iFramesTime;
