@@ -18,4 +18,4 @@ MonoBehaviour:
   - {fileID: 1758539057679497611, guid: 38f7e6ba0c513c441ac3fcad013f0bdd, type: 3}
   - {fileID: 6030677075607094720, guid: 41d681b6b7a315442a22c1d3bb277d82, type: 3}
   - {fileID: 2904825900538312125, guid: 504de0979eda92f478c84de11c9dfc77, type: 3}
-  noneChance: 0.498
+  noneChance: 0.139

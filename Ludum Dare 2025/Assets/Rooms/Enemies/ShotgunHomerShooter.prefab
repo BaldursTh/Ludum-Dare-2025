@@ -540,7 +540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
   bulletCount: 4
-  spreadAngle: 60
+  spreadAngle: 80
 --- !u!114 &7926000010666309576
 MonoBehaviour:
   m_ObjectHideFlags: 0

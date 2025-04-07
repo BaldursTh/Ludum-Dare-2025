@@ -19,4 +19,6 @@ MonoBehaviour:
   - {fileID: 9187756015942741292, guid: 58c5cc089f4cf664caead394e38d97f3, type: 3}
   - {fileID: 8157847477725677729, guid: 805b5dd9de9f23842b973b11daa1480c, type: 3}
   - {fileID: 6471137007333740090, guid: 4f920d51e6420344aab3f730a2154e3c, type: 3}
-  noneChance: 0.657
+  - {fileID: 811882984009260346, guid: 8e2250ca205522f4c81ade094c7bfc7a, type: 3}
+  - {fileID: 3714014247068433550, guid: 1135ef6a568702d45b57e07b4afff4db, type: 3}
+  noneChance: 0.279

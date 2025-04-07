@@ -51,7 +51,7 @@ public class EnemyAnimations : MonoBehaviour
         isShooting = true;
         GameObject child = gunRotater.transform.GetChild(0).gameObject;
         Vector3 start = child.transform.localPosition ;
-        Vector3 recoilDir = gunRotater.transform.rotation * gunRotater.transform.up;
+        Vector3 recoilDir = gunRotater.transform.rotation * Vector2.right;
         Vector3 end = child.transform.localPosition + (-recoilDir.normalized * shootRecoilDistance);
         while ((child.transform.localPosition - end).magnitude > 0.01f) {
             child.transform.localPosition = Vector3.MoveTowards(child.transform.localPosition, end, shootRecoil);

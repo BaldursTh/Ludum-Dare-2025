@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class GroundMove : MonoBehaviour
@@ -10,7 +9,7 @@ public class GroundMove : MonoBehaviour
     Rigidbody2D rb;
     EnemyAnimations anim;
     bool collide = true;
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<EnemyAnimations>();
@@ -24,11 +23,11 @@ public class GroundMove : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collide) return;
-        if (collision.tag == "World" || collision.tag == "Edge") {
+        // if (collision.tag == "World" || collision.tag == "Edge") {
             StartCollideCooldown();
             anim.FlipX(2);
             moveSpeed = -moveSpeed;
-        }
+        // }
     }
 
     void StartCollideCooldown() {
@@ -39,7 +38,7 @@ public class GroundMove : MonoBehaviour
     IEnumerator cooldown;
     IEnumerator CollideCooldown() {
         collide = false;
-        yield return new WaitForSeconds (1f);
+        yield return new WaitForSeconds (0.3f);
         collide = true;
     }
 }

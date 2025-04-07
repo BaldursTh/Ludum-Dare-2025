@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a625244ec2b9044a012d279eb31dc6, type: 3}
   m_Name: CameraShakeData
   m_EditorClassIdentifier: 
-  strength: 1
-  time: 0.15
-  shakeGap: 1
-  rotateToPositionRatio: 0.5
+  strength: 0
+  time: 0
+  shakeGap: 0
+  rotateToPositionRatio: 0

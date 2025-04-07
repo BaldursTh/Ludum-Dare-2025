@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b4f5535339a3643a5319a4dd6cea3f, type: 3}
+  m_Name: TileExplosion
+  m_EditorClassIdentifier: 
+  Effect: {fileID: 6134502587989347048, guid: 0fd77cc0be40f9946b72bd781692b3e9, type: 3}
+  startDelay: 0
+  duration: 2

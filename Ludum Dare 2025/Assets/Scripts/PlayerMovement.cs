@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 using Unity.VisualScripting;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public bool Attacking = false;
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] public Rigidbody2D rb;
     [Header("Player Stats")]
     [SerializeField] private float XSpeed = 5f;
     [SerializeField] private float XAcceleration = 3f;
