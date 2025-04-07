@@ -26,10 +26,6 @@ public class CameraMovement : MonoBehaviour
 
         if (player.transform.position.y - transform.position.y < FollowHeight)
             targetSpeed += Mathf.Pow(FollowHeight + transform.position.y - player.transform.position.y, System.MathF.E);
-        if (player.transform.position.y - transform.position.y < -FollowHeight)
-            bonusAcceleration = Mathf.Min(bonusAcceleration+Time.fixedDeltaTime*0.2f, 1);
-        if (player.transform.position.y - transform.position.y < -2*FollowHeight)
-            bonusAcceleration = Mathf.Min(bonusAcceleration+Time.fixedDeltaTime*0.5f, 1);
 
         if (player.Dashing)
         {
@@ -39,7 +35,7 @@ public class CameraMovement : MonoBehaviour
         }
         else
         {
-            bonusAcceleration = Mathf.Min(bonusAcceleration+Time.fixedDeltaTime*0.01f, 1);
+            bonusAcceleration = 1;
         }
 
         speed = Mathf.Lerp(
