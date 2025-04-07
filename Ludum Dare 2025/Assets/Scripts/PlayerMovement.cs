@@ -225,6 +225,7 @@ public class PlayerMovement : MonoBehaviour
         return Dashing;
     }
     public void AddDash() {
+        if (CurrentDashes >= MaxDashes) return;
         CurrentDashes++;
     }
     void OnTriggerEnter2D(Collider2D other)
